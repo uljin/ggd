@@ -42,7 +42,6 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
   var btn = function (c) { return root.querySelector(".b-" + c); };
   var shots = [], stream = null, frame = "paper";
   var logo = new Image(); logo.src = "{{ '/images/ggd_logo.JPG' | relative_url }}";
-  var stamp = new Image(); stamp.src = "{{ '/images/ggd_stamp_paper.JPG' | relative_url }}";
   var COLORS = { paper: "#f4f2ee", green: "#5cb96b" }, INK = "#111111";
   var W = 600, PAD = 30, GAP = 18, PW = W - PAD * 2, PH = Math.round(PW * 3 / 4), FOOT = 250;
   var H = PAD + PH * 4 + GAP * 3 + FOOT;
@@ -82,7 +81,7 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
     }
     compose();
     if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
-    video.hidden = true; out.hidden = false;
+    root.querySelector(".booth-stage").classList.add("done"); out.hidden = false;
     show("save", true); show("again", true);
     show("share", !!(navigator.canShare && navigator.canShare({ files: [new File([""], "a.png", { type: "image/png" })] })));
   });
@@ -100,10 +99,8 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
     var fy = PAD + PH * 4 + GAP * 3;
     x.fillStyle = INK; x.fillRect(PAD, fy + 18, PW, 4);
     x.globalCompositeOperation = "multiply";
-    var lw = 300, lh = lw * logo.naturalHeight / logo.naturalWidth;
+    var lw = 380, lh = lw * logo.naturalHeight / logo.naturalWidth;
     x.drawImage(logo, PAD, fy + 46, lw, lh);
-    x.save(); x.translate(W - PAD - 70, fy + 120); x.rotate(-0.08);
-    x.drawImage(stamp, -60, -60, 120, 120); x.restore();
     x.globalCompositeOperation = "source-over";
     x.fillStyle = INK; x.font = "400 18px 'IBM Plex Sans KR', sans-serif";
     var d = new Date(), day = d.getFullYear() + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + String(d.getDate()).padStart(2, "0");
