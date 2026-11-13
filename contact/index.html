@@ -1,0 +1,39 @@
+---
+layout: base
+title: 연락
+heading: 연락
+sub: 메일, 인스타그램, 아니면 몸소
+crumb: 조합
+nav: contact
+plane: true
+---
+{% assign s = site.data.site %}
+<section>
+  <header><span class="no">01</span><h2>메일</h2></header>
+  <div class="body prose">
+    <p class="big-line"><a href="mailto:{{ s.email }}">{{ s.email }}</a></p>
+  </div>
+</section>
+
+<section>
+  <header><span class="no">02</span><h2>인스타그램</h2></header>
+  <div class="body prose">
+    <p class="big-line"><a href="{{ s.instagram }}">@ggdcoop ↗</a></p>
+  </div>
+</section>
+
+<section>
+  <header><span class="no">03</span><h2>주사무소</h2><p>가입과 탈퇴도 여기서</p></header>
+  <div class="body prose">
+    <p class="big-line">{{ s.address }}</p>
+    <p>{{ s.join_text }}</p>
+  </div>
+</section>
+
+<section>
+  <header><span class="no">04</span><h2>등록번호</h2></header>
+  <ul class="roles body">
+    <li><span class="role">법인등록번호</span><span>{{ s.corp_no }}</span></li>
+    <li><span class="role">사업자등록번호</span><span>{{ s.biz_no }}</span></li>
+  </ul>
+</section>

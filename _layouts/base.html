@@ -14,10 +14,8 @@
   <a href="{{ '/' | relative_url }}">{{ site.data.site.name_en }}</a>
   <nav>
     <a href="{{ '/news/' | relative_url }}"{% if page.nav == "news" %} aria-current="page"{% endif %}>소식</a>
-    <a href="{{ '/articles/' | relative_url }}" class="hide-m"{% if page.nav == "articles" %} aria-current="page"{% endif %}>정관</a>
-    <a href="{{ '/articles/#rules' | relative_url }}" class="hide-m">규약</a>
-    <a href="{{ '/listen_to_ggd/listen_to_ggd.html' | relative_url }}"{% if page.nav == "listen" %} aria-current="page"{% endif %}>듣기</a>
-    <a href="#contact">연락</a>
+    <a href="{{ '/articles/' | relative_url }}" class="hide-m"{% if page.nav == "articles" %} aria-current="page"{% endif %}>정관·규약</a>
+    <a href="{{ '/contact/' | relative_url }}"{% if page.nav == "contact" %} aria-current="page"{% endif %}>연락</a>
     <a href="{{ site.data.site.instagram }}" class="ig" aria-label="인스타그램">IG ↗</a>
   </nav>
 </header>
