@@ -38,7 +38,12 @@ ol, ul { list-style: none; }
 img { display: block; max-width: 100%; }
 
 /* ── 상단 바 ── */
+html { scroll-padding-top: 48px; }   /* 고정된 상단 바 밑으로 앵커가 숨지 않게 */
 .top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
   display: flex;
   justify-content: space-between;
   border-bottom: var(--line);
@@ -335,7 +340,7 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 .top a.home { display: flex; align-items: center; gap: 10px; }
 .top a.home img { height: 20px; width: auto; mix-blend-mode: multiply; }
 .top a.home:hover img { filter: invert(1); mix-blend-mode: screen; }
-@media (max-width: 720px) { .top a.home span { display: none; } }
+@media (max-width: 720px) { .top a.home img + span { display: none; } }
 
 /* ── 첫 화면: 로고 표지 + 큰 메뉴 ── */
 .cover {

@@ -11,7 +11,7 @@
 <body id="top">
 
 <header class="top">
-  <a class="home" href="{{ '/' | relative_url }}"><img src="{{ '/images/ggd_logo.JPG' | relative_url }}" alt="거거덩 협동조합 처음으로" height="20"><span>GGD Cooperative</span></a>
+  <a class="home" href="{{ '/' | relative_url }}">{% unless page.url == "/" %}<img src="{{ '/images/ggd_logo.JPG' | relative_url }}" alt="거거덩 협동조합 처음으로" height="20">{% endunless %}<span>GGD Cooperative</span></a>
   <nav>
     <a href="{{ site.data.site.youtube }}">YouTube ↗</a>
     <a href="{{ site.data.site.instagram }}">Instagram ↗</a>
