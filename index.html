@@ -17,15 +17,22 @@ title: 거거덩 협동조합
   <div><b>문의</b><a href="mailto:{{ s.email }}">{{ s.email }}</a></div>
 </div>
 
+{% assign latest = site.posts | first %}
 <nav class="menu" aria-label="메뉴">
-  <a href="{{ '/news/' | relative_url }}">소식<span>01 →</span></a>
-  <a href="{{ '/hall_of_fame/hall_of_fame.html' | relative_url }}">명예의 전당<span>02 →</span></a>
-  <a href="{{ '/general_meeting/gm.html' | relative_url }}">총회·조직<span>03 →</span></a>
-  <a href="{{ '/articles/' | relative_url }}">정관·규약<span>04 →</span></a>
-  <a href="{{ '/listen_to_ggd/listen_to_ggd.html' | relative_url }}">들어볼거거덩<span>05 →</span></a>
-  <a href="{{ '/record_market/record_market.html' | relative_url }}">레코드마켓<span>06 →</span></a>
-  <a href="{{ '/contact/' | relative_url }}">연락<span>07 →</span></a>
-  <a href="{{ '/garage/' | relative_url }}">거라지<span>바 아네모네 · 08 →</span></a>
-  <a href="{{ '/photobooth/' | relative_url }}">거거덩네컷<span>찍기 · 09 →</span></a>
-  <div class="off">거기사<span>{{ s.geogisa }}</span></div>
+  <a href="{{ '/news/' | relative_url }}">소식<span>{% if latest %}{{ latest.title | truncate: 24 }} · {% endif %}01 →</span></a>
+  <a href="{{ '/garage/' | relative_url }}">거라지<span>바 아네모네 · 02 →</span></a>
+  <a href="{{ '/listen_to_ggd/listen_to_ggd.html' | relative_url }}">들어볼거거덩<span>범골라디오 · 03 →</span></a>
+  <a href="{{ '/record_market/record_market.html' | relative_url }}">레코드마켓<span>04 →</span></a>
+  <a href="{{ '/photobooth/' | relative_url }}">거거덩네컷<span>찍기 · 05 →</span></a>
 </nav>
+
+<section class="coop-menu">
+  <header><span class="no">조합</span><h2>조합 안내</h2></header>
+  <ul class="rows body">
+    <li><a href="{{ '/hall_of_fame/hall_of_fame.html' | relative_url }}"><span class="n">A</span><span>명예의 전당</span><span class="meta">조합원 {{ site.data.members.size }}명 →</span></a></li>
+    <li><a href="{{ '/general_meeting/gm.html' | relative_url }}"><span class="n">B</span><span>총회·조직</span><span class="meta">→</span></a></li>
+    <li><a href="{{ '/articles/' | relative_url }}"><span class="n">C</span><span>정관·규약</span><span class="meta">→</span></a></li>
+    <li><a href="{{ '/contact/' | relative_url }}"><span class="n">D</span><span>연락</span><span class="meta">→</span></a></li>
+    <li><div class="row off"><span class="n">E</span><span>거기사</span><span class="meta">{{ s.geogisa }}</span></div></li>
+  </ul>
+</section>

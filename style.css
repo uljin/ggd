@@ -349,7 +349,7 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 .cover {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  min-height: calc(100vh - 38px - 66px - 10 * 62px);
+  min-height: calc(100vh - 38px - 66px - 5 * 62px);
   border-bottom: var(--thick);
 }
 .cover h1 {
@@ -388,6 +388,7 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 .menu a span, .menu .off span { font-size: 12px; font-weight: 400; letter-spacing: 0; white-space: nowrap; }
 .menu a:hover { background: var(--plane); }
 .menu + footer { border-top: var(--line); }
+.menu + .coop-menu { border-top: var(--thick); }
 @media (max-width: 720px) {
   .cover { grid-template-columns: 1fr; min-height: 0; }
   .cover h1 { border-right: 0; border-bottom: var(--line); }
