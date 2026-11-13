@@ -18,9 +18,7 @@ defaults:
   - scope: { path: "", type: chapters }
     values: { layout: chapter, nav: articles }
   - scope: { path: "", type: posts }
-    values: { layout: post, nav: news }
-
-permalink: /news/:year/:month/:day/:title/
+    values: { layout: post, nav: news, permalink: "/news/:year/:month/:day/:title/" }
 
 exclude:
   - README.md
