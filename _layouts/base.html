@@ -51,6 +51,17 @@
   </div>
 </dialog>
 <script>
+// 바깥 사이트와 PDF는 새 탭으로 (관리자가 쓴 소식 글 속 링크까지 자동으로)
+document.querySelectorAll("a[href]").forEach(function (a) {
+  var outside = a.host && a.host !== location.host;
+  var pdf = /\.pdf($|[?#])/i.test(a.getAttribute("href"));
+  if ((outside || pdf) && !a.closest(".gallery")) {
+    a.target = "_blank";
+    a.rel = "noopener";
+  }
+});
+</script>
+<script>
 // 사진 크게 보기: .gallery 안의 링크를 누르면 열림
 (function () {
   var links = Array.prototype.slice.call(document.querySelectorAll(".gallery a"));
