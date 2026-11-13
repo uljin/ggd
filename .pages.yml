@@ -37,6 +37,18 @@ content:
         label: 본문
         type: rich-text
 
+  - name: events
+    label: 일정 (첫 화면 캘린더)
+    type: file
+    path: _data/events.yml
+    list: true
+    fields:
+      - { name: date, label: 날짜, type: date, required: true }
+      - { name: time, label: 시간 (예 19:00), type: string }
+      - { name: title, label: 이름, type: string, required: true }
+      - { name: place, label: 장소, type: string }
+      - { name: link, label: 링크 (인스타 게시물 등), type: string }
+
   - name: info
     label: 조합 정보
     type: group
