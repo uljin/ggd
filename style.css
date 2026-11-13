@@ -534,7 +534,7 @@ body > footer { margin-top: auto; border-top: var(--line); }
 @media (max-width: 720px) {
   .cal-grid > div { min-height: 52px; padding: 4px; }
   .cal-grid .day em { font-size: 0; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; }
-  footer { flex-wrap: wrap; }
+
 }
 
 .menu + .cal, .cal + .coop-menu { border-top: var(--thick); }

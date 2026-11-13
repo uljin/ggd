@@ -64,7 +64,7 @@
 
 {% assign s = site.data.site %}
 <footer id="contact">
-  <div class="f-reg"><span>법인등록번호 {{ s.corp_no }}</span><span>사업자등록번호 {{ s.biz_no }}</span></div>
+  <div class="f-reg"><span>© 2023–{{ site.time | date: "%Y" }} {{ s.name }}</span><span>법인등록번호 {{ s.corp_no }}</span><span>사업자등록번호 {{ s.biz_no }}</span></div>
   <a class="stamp" href="{{ '/' | relative_url }}"><img src="{{ '/images/ggd_stamp_paper.JPG' | relative_url }}" alt="거거덩 협동조합 도장" width="56"></a>
 </footer>
 
