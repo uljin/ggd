@@ -15,7 +15,12 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
       <canvas class="booth-result" hidden></canvas>
       <div class="booth-count" aria-live="polite"></div>
       <div class="booth-flash"></div>
-      <p class="booth-msg">카메라를 켜면 여기 화면이 나와요.</p>
+      <p class="booth-msg" hidden>카메라를 켜면 여기 화면이 나와요.</p>
+      <button type="button" class="b-start" aria-label="카메라 켜기">
+        <svg viewBox="0 0 64 48" width="64" height="48" aria-hidden="true"><path d="M6 12h12l5-7h18l5 7h12v31H6z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="32" cy="27" r="10" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+        <span>카메라 켜기</span>
+      </button>
+      <button type="button" class="b-shoot" hidden aria-label="네 컷 찍기"><i></i><span>네 컷 찍기</span></button>
     </div>
     <div class="booth-thumbs" aria-label="찍은 컷"></div>
     <div class="booth-frames" role="radiogroup" aria-label="틀 색">
@@ -24,8 +29,6 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
       <button type="button" data-frame="green" aria-pressed="false">초록</button>
     </div>
     <div class="booth-actions">
-      <button type="button" class="b-start">카메라 켜기</button>
-      <button type="button" class="b-shoot" hidden>네 컷 찍기</button>
       <button type="button" class="b-save" hidden>저장 ↓</button>
       <button type="button" class="b-share" hidden>공유 ↗</button>
       <button type="button" class="b-again" hidden>다시 찍기</button>
@@ -53,9 +56,9 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
     try {
       stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 960 } }, audio: false });
       video.srcObject = stream; await video.play();
-      msg.hidden = true; show("start", false); show("shoot", true);
+      show("start", false); show("shoot", true);
     } catch (e) {
-      msg.textContent = "카메라를 켤 수 없어요. 브라우저에서 카메라 권한을 허용했는지 확인해 주세요.";
+      msg.hidden = false; msg.textContent = "카메라를 켤 수 없어요. 브라우저에서 카메라 권한을 허용했는지 확인해 주세요.";
     }
   });
 

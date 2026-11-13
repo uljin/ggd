@@ -490,3 +490,25 @@ body > footer { margin-top: auto; border-top: var(--line); }
 .booth button:hover, .booth button[aria-pressed="true"] { background: var(--plane); }
 .booth button[hidden] { display: none; }
 .booth-msg[hidden] { display: none; }
+
+/* 거거덩네컷: 카메라 켜기(픽토그램)와 셔터(빨간 원) */
+.booth .booth-stage button { border: 0; }
+.booth .b-start {
+  position: absolute; inset: 0; margin: auto; width: 180px; height: 150px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  color: var(--paper); background: none; font-size: 18px; font-weight: 700;
+}
+.booth .b-start:hover { background: none; color: var(--plane); }
+.booth .b-shoot {
+  position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  background: none; color: var(--paper); font-size: 13px; font-weight: 700; padding: 0;
+}
+.booth .b-shoot i {
+  width: 72px; height: 72px; border-radius: 50%;
+  border: 5px solid var(--paper); box-shadow: inset 0 0 0 4px var(--ink);
+  background: var(--stamp);
+}
+.booth .b-shoot:hover { background: none; }
+.booth .b-shoot:hover i { transform: scale(1.06); }
+.booth .b-shoot span { text-shadow: 0 1px 2px var(--ink); }
