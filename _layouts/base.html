@@ -38,5 +38,62 @@
   <div>사업자등록번호<br>{{ s.biz_no }}<a class="stamp" href="{{ '/' | relative_url }}"><img src="{{ '/images/ggd_stamp_paper.JPG' | relative_url }}" alt="거거덩 협동조합 도장" width="96"></a></div>
 </footer>
 
+<dialog class="viewer" aria-label="사진 크게 보기">
+  <div class="viewer-bar">
+    <span class="viewer-count"></span>
+    <span class="viewer-cap"></span>
+    <button type="button" class="viewer-close" aria-label="닫기">닫기 ×</button>
+  </div>
+  <div class="viewer-stage"><img alt=""></div>
+  <div class="viewer-nav">
+    <button type="button" class="viewer-prev" aria-label="이전 사진">← 이전</button>
+    <button type="button" class="viewer-next" aria-label="다음 사진">다음 →</button>
+  </div>
+</dialog>
+<script>
+// 사진 크게 보기: .gallery 안의 링크를 누르면 열림
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll(".gallery a"));
+  var dlg = document.querySelector(".viewer");
+  if (!links.length || !dlg || !dlg.showModal) return;
+  var img = dlg.querySelector("img"), count = dlg.querySelector(".viewer-count"), cap = dlg.querySelector(".viewer-cap");
+  var set = [], i = 0;
+  function show(n) {
+    i = (n + set.length) % set.length;
+    var a = set[i], fc = a.closest("figure") && a.closest("figure").querySelector("figcaption");
+    var inner = a.querySelector("img");
+    img.src = a.href;
+    img.alt = inner ? inner.alt : "";
+    count.textContent = (i + 1 < 10 ? "0" : "") + (i + 1) + " / " + (set.length < 10 ? "0" : "") + set.length;
+    cap.textContent = fc ? fc.textContent.replace(/^\d+\s*·?\s*/, "") : "";
+    dlg.classList.toggle("single", set.length < 2);
+  }
+  links.forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (e.metaKey || e.ctrlKey || e.shiftKey) return;   // 새 탭으로 열기는 그대로
+      e.preventDefault();
+      set = Array.prototype.slice.call(a.closest(".gallery").querySelectorAll("a"));
+      show(set.indexOf(a));
+      dlg.showModal();
+    });
+  });
+  dlg.querySelector(".viewer-prev").addEventListener("click", function () { show(i - 1); });
+  dlg.querySelector(".viewer-next").addEventListener("click", function () { show(i + 1); });
+  dlg.querySelector(".viewer-close").addEventListener("click", function () { dlg.close(); });
+  dlg.addEventListener("click", function (e) { if (e.target === dlg || e.target.classList.contains("viewer-stage")) dlg.close(); });
+  dlg.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") show(i - 1);
+    if (e.key === "ArrowRight") show(i + 1);
+  });
+  dlg.addEventListener("close", function () { img.removeAttribute("src"); });
+  var x0 = null;
+  dlg.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  dlg.addEventListener("touchend", function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50) show(dx < 0 ? i + 1 : i - 1);
+  });
+})();
+</script>
 </body>
 </html>

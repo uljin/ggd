@@ -390,3 +390,29 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 .big-line { font-size: clamp(22px, 3vw, 34px); font-weight: 700; letter-spacing: -.02em; line-height: 1.2; }
 .big-line a { text-decoration: none; }
 .big-line a:hover { background: var(--plane); }
+
+/* ── 사진 크게 보기 ── */
+.viewer {
+  border: 0; padding: 0; margin: 0;
+  width: 100vw; height: 100vh; max-width: none; max-height: none;
+  background: var(--ink); color: var(--paper);
+  display: none; flex-direction: column;
+}
+.viewer[open] { display: flex; }
+.viewer::backdrop { background: var(--ink); }
+.viewer-bar, .viewer-nav { display: flex; border-color: #444; font-size: 13px; }
+.viewer-bar { border-bottom: 1px solid #444; }
+.viewer-nav { border-top: 1px solid #444; }
+.viewer-bar > *, .viewer-nav > * { padding: 12px 14px; }
+.viewer-count { font-variant-numeric: tabular-nums; border-right: 1px solid #444; }
+.viewer-cap { flex: 1; color: #aaa; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.viewer button {
+  font: inherit; color: inherit; background: none; border: 0; cursor: pointer;
+}
+.viewer-close { border-left: 1px solid #444 !important; }
+.viewer-nav button { flex: 1; text-align: left; }
+.viewer-nav .viewer-next { text-align: right; border-left: 1px solid #444; }
+.viewer button:hover, .viewer button:focus-visible { background: var(--plane); color: var(--ink); outline: none; }
+.viewer-stage { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 14px; }
+.viewer-stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.viewer.single .viewer-nav { display: none; }
