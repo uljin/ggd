@@ -1,55 +1,17 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>명예의 전당 — 거거덩 협동조합</title>
-<meta name="description" content="맨땅에 생음악 심어 아름다운 음악도시 만들기 — 거거덩 협동조합">
-<link rel="stylesheet" href="../style.css">
-<link rel="icon" href="../images/ggd_stamp_paper.JPG">
-</head>
-<body id="top">
-<header class="top">
-  <a href="../index.html">GGD Cooperative</a>
-  <nav><a href="../chapter/first.html" class="hide-m">정관</a><a href="../index.html#rules" class="hide-m">규약</a><a href="../listen_to_ggd/listen_to_ggd.html">듣기</a><a href="#contact">연락</a></nav>
-</header>
-<div class="pagehead plane">
-  <div class="crumb"><a href="../index.html">← 처음으로</a><span>조합</span></div>
-  <h1><small>거거덩협동조합원 29명</small>명예의 전당</h1>
-</div>
-
+---
+layout: base
+title: 명예의 전당
+heading: 명예의 전당
+crumb: 조합
+plane: true
+---
+{% assign members = site.data.members %}
 <section>
-  <header><span class="no">01</span><h2>조합원</h2><p>가입 순</p></header>
+  <header><span class="no">01</span><h2>조합원</h2><p>{{ members.size }}명 · 가입 순</p></header>
   <ol class="names body">
-    <li><span>박종현</span><span class="n">001</span></li>
-    <li><span>이주현</span><span class="n">002</span></li>
-    <li><span>홍성훈</span><span class="n">003</span></li>
-    <li><span>이석면</span><span class="n">004</span></li>
-    <li><span>안홍인</span><span class="n">005</span></li>
-    <li><span>김채현</span><span class="n">006</span></li>
-    <li><span>이지향</span><span class="n">007</span></li>
-    <li><span>정종현</span><span class="n">008</span></li>
-    <li><span>김민선</span><span class="n">009</span></li>
-    <li><span>노기은</span><span class="n">010</span></li>
-    <li><span>임찬무</span><span class="n">011</span></li>
-    <li><span>변지현</span><span class="n">012</span></li>
-    <li><span>전상민</span><span class="n">013</span></li>
-    <li><span>고재현</span><span class="n">014</span></li>
-    <li><span>김인선</span><span class="n">015</span></li>
-    <li><span>박미령</span><span class="n">016</span></li>
-    <li><span>노현지</span><span class="n">017</span></li>
-    <li><span>정수은</span><span class="n">018</span></li>
-    <li><span>오은정</span><span class="n">019</span></li>
-    <li><span>송호중</span><span class="n">020</span></li>
-    <li><span>정예진</span><span class="n">021</span></li>
-    <li><span>윤성호</span><span class="n">022</span></li>
-    <li><span>이나경</span><span class="n">023</span></li>
-    <li><span>조혜수</span><span class="n">024</span></li>
-    <li><span>이다영</span><span class="n">025</span></li>
-    <li><span>안지윤</span><span class="n">026</span></li>
-    <li><span>유혜옥</span><span class="n">027</span></li>
-    <li><span>이예지</span><span class="n">028</span></li>
-    <li><span>김예진</span><span class="n">029</span></li>
+    {% for m in members %}
+    <li><span>{{ m.name }}</span><span class="n">{% if forloop.index < 100 %}0{% endif %}{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span></li>
+    {% endfor %}
   </ol>
 </section>
 
@@ -57,13 +19,13 @@
   <header><span class="no">02</span><h2>가입과 탈퇴</h2></header>
   <div class="body">
     <div class="prose">
-      <p>가입과 탈퇴는 거거덩협동조합 사무실에 몸소 놀러오셔서 해주시기 바랍니다.</p>
-      <p>서울시 서대문구 연희로 177, 202호</p>
+      <p>{{ site.data.site.join_text }}</p>
+      <p>{{ site.data.site.address }}</p>
     </div>
     <div class="gallery">
-    <figure><a href="../hall_of_fame/images/form_certificate.JPG"><img src="../hall_of_fame/images/form_certificate.JPG" alt="조합원 증서" loading="lazy"></a><figcaption>조합원 증서</figcaption></figure>
-    <figure><a href="../hall_of_fame/images/form_join.JPG"><img src="../hall_of_fame/images/form_join.JPG" alt="가입 신청서" loading="lazy"></a><figcaption>가입 신청서</figcaption></figure>
-    <figure><a href="../hall_of_fame/images/form_withdrawal.JPG"><img src="../hall_of_fame/images/form_withdrawal.JPG" alt="탈퇴 신청서" loading="lazy"></a><figcaption>탈퇴 신청서</figcaption></figure>
+      <figure><a href="{{ '/hall_of_fame/images/form_certificate.JPG' | relative_url }}"><img src="{{ '/hall_of_fame/images/form_certificate.JPG' | relative_url }}" alt="조합원 증서" loading="lazy"></a><figcaption>조합원 증서</figcaption></figure>
+      <figure><a href="{{ '/hall_of_fame/images/form_join.JPG' | relative_url }}"><img src="{{ '/hall_of_fame/images/form_join.JPG' | relative_url }}" alt="가입 신청서" loading="lazy"></a><figcaption>가입 신청서</figcaption></figure>
+      <figure><a href="{{ '/hall_of_fame/images/form_withdrawal.JPG' | relative_url }}"><img src="{{ '/hall_of_fame/images/form_withdrawal.JPG' | relative_url }}" alt="탈퇴 신청서" loading="lazy"></a><figcaption>탈퇴 신청서</figcaption></figure>
     </div>
   </div>
 </section>
@@ -71,23 +33,10 @@
 <section>
   <header><span class="no">03</span><h2>참고</h2></header>
   <ul class="rows body">
-    <li><a href="../hall_of_fame/personal_information/personal_information_consent.pdf"><span class="n">PDF</span><span>개인정보 제공 및 활용 동의서</span><span class="meta">↓</span></a></li>
-    <li><a href="../hall_of_fame/personal_information/personal_information_policy.pdf"><span class="n">PDF</span><span>개인정보처리방침</span><span class="meta">↓</span></a></li>
+    <li><a href="{{ '/hall_of_fame/personal_information/personal_information_consent.pdf' | relative_url }}"><span class="n">PDF</span><span>개인정보 제공 및 활용 동의서</span><span class="meta">↓</span></a></li>
+    <li><a href="{{ '/hall_of_fame/personal_information/personal_information_policy.pdf' | relative_url }}"><span class="n">PDF</span><span>개인정보처리방침</span><span class="meta">↓</span></a></li>
     <li><a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%B2%95"><span class="n">법</span><span>개인정보보호법</span><span class="meta">↗</span></a></li>
-    <li><a href="../chapter/second.html#a16"><span class="n">정관</span><span>제16조 탈퇴·제명조합원의 지분환급청구권</span><span class="meta">→</span></a></li>
+    <li><a href="{{ '/chapter/second.html#a16' | relative_url }}"><span class="n">정관</span><span>제16조 탈퇴·제명조합원의 지분환급청구권</span><span class="meta">→</span></a></li>
     <li><a href="https://www.law.go.kr/LSW//lsInfoP.do?lsId=011528&amp;ancYnChk=0#0000"><span class="n">법</span><span>협동조합 기본법 제26조</span><span class="meta">↗</span></a></li>
   </ul>
 </section>
-
-<footer id="contact">
-  <div>
-    <a class="big" href="mailto:official@ggdcoop.com">official@ggdcoop.com</a>
-    서울시 서대문구 연희로 177, 202호<br>
-    <a href="https://www.instagram.com/ggdcoop/">Instagram @ggdcoop</a>
-  </div>
-  <div>법인등록번호<br>270151-0037941</div>
-  <div>사업자등록번호<br>531-87-03201<a class="stamp" href="../index.html"><img src="../images/ggd_stamp_paper.JPG" alt="거거덩 협동조합 도장" width="96"></a></div>
-</footer>
-
-</body>
-</html>

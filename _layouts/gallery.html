@@ -1,0 +1,13 @@
+---
+layout: base
+---
+{{ content }}
+{% assign g = site.data[page.data] %}
+<section>
+  <header><span class="no">사진</span><h2>{{ g.photos.size }}장</h2><p>누르면 크게</p></header>
+  <div class="gallery body">
+    {% for ph in g.photos %}
+    <figure><a href="{{ ph.image | relative_url }}"><img src="{{ ph.image | relative_url }}" alt="{{ ph.caption | default: page.heading }}" loading="lazy"></a><figcaption>{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}{% if ph.caption and ph.caption != "" %} · {{ ph.caption }}{% endif %}</figcaption></figure>
+    {% endfor %}
+  </div>
+</section>

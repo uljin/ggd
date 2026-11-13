@@ -1,0 +1,28 @@
+# 거거덩 협동조합 사이트 설정
+title: 거거덩 협동조합
+description: 맨땅에 생음악 심어 아름다운 음악도시 만들기 — 거거덩 협동조합
+
+# uljin.github.io/ggd 에서 테스트하는 동안은 "/ggd".
+# ggdcoop.com 도메인으로 옮기면 "" 로 바꾸기.
+baseurl: "/ggd"
+
+lang: ko
+timezone: Asia/Seoul
+
+collections:
+  chapters:
+    output: true
+    permalink: /chapter/:name.html
+
+defaults:
+  - scope: { path: "", type: chapters }
+    values: { layout: chapter, nav: articles }
+  - scope: { path: "", type: posts }
+    values: { layout: post, nav: news }
+
+permalink: /news/:year/:month/:day/:title/
+
+exclude:
+  - README.md
+  - LICENSE
+  - .pages.yml

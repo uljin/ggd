@@ -302,3 +302,16 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
   .grid2 { grid-template-columns: 1fr; }
   .grid2 > :nth-child(odd) { border-right: 0; }
 }
+
+/* ── 소식 글 ── */
+.hero { border-bottom: var(--line); }
+.hero img { width: 100%; max-height: 70vh; object-fit: cover; }
+.post { font-size: 16px; line-height: 1.75; }
+.post h2, .post h3 { font-size: 20px; letter-spacing: -.02em; margin: 1.4em 0 .4em; }
+.post img { margin: 1em 0; border: var(--line); }
+.post ul, .post ol { padding-left: 1.4em; margin: .6em 0; }
+.post ul { list-style: square; }
+.post ol { list-style: decimal; }
+.post blockquote { border-left: var(--thick); padding-left: 14px; margin: 1em 0; }
+.gallery.one { grid-template-columns: 1fr; }
+.gallery.one figure { border-right: 0; border-bottom: 0; }

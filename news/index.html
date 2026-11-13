@@ -1,0 +1,19 @@
+---
+layout: base
+title: 소식
+heading: 소식
+sub: 거거덩에서 알리는 것들
+crumb: 소식
+nav: news
+plane: true
+---
+<section>
+  <header><span class="no">전체</span><h2>{{ site.posts.size }}개</h2></header>
+  <ul class="rows body">
+    {% for p in site.posts %}
+    <li><a href="{{ p.url | relative_url }}"><span class="n">{{ p.date | date: "%y.%m.%d" }}</span><span>{{ p.title }}</span><span class="meta">→</span></a></li>
+    {% else %}
+    <li><div class="row off"><span class="n">—</span><span>아직 올라온 소식이 없어요</span><span class="meta"></span></div></li>
+    {% endfor %}
+  </ul>
+</section>

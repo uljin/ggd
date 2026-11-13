@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% if page.title and page.url != "/" %}{{ page.title }} — {% endif %}{{ site.data.site.name }}</title>
+<meta name="description" content="{{ page.description | default: site.description }}">
+<link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+<link rel="icon" href="{{ '/images/ggd_stamp_paper.JPG' | relative_url }}">
+</head>
+<body id="top">
+
+<header class="top">
+  <a href="{{ '/' | relative_url }}">{{ site.data.site.name_en }}</a>
+  <nav>
+    <a href="{{ '/news/' | relative_url }}"{% if page.nav == "news" %} aria-current="page"{% endif %}>소식</a>
+    <a href="{{ '/chapter/first.html' | relative_url }}" class="hide-m"{% if page.nav == "articles" %} aria-current="page"{% endif %}>정관</a>
+    <a href="{{ '/#rules' | relative_url }}" class="hide-m">규약</a>
+    <a href="{{ '/listen_to_ggd/listen_to_ggd.html' | relative_url }}"{% if page.nav == "listen" %} aria-current="page"{% endif %}>듣기</a>
+    <a href="#contact">연락</a>
+  </nav>
+</header>
+
+{% if page.heading %}
+<div class="pagehead{% if page.plane %} plane{% endif %}">
+  <div class="crumb"><a href="{{ '/' | relative_url }}">← 처음으로</a><span>{{ page.crumb }}</span></div>
+  <h1>{% if page.sub %}<small>{{ page.sub }}</small>{% endif %}{{ page.heading }}</h1>
+</div>
+{% endif %}
+
+{{ content }}
+
+{% assign s = site.data.site %}
+<footer id="contact">
+  <div>
+    <a class="big" href="mailto:{{ s.email }}">{{ s.email }}</a>
+    {{ s.address }}<br>
+    <a href="{{ s.instagram }}">Instagram @ggdcoop</a>
+  </div>
+  <div>법인등록번호<br>{{ s.corp_no }}</div>
+  <div>사업자등록번호<br>{{ s.biz_no }}<a class="stamp" href="{{ '/' | relative_url }}"><img src="{{ '/images/ggd_stamp_paper.JPG' | relative_url }}" alt="거거덩 협동조합 도장" width="96"></a></div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+- date: 2025-12-23
+  name: 임시총회
+  docs:
+  - label: 개최 공고문
+    file: /general_meeting/document/ggd_gm_notice(251223).pdf
+- date: 2025-03-09
+  name: 제2회 정기총회
+  docs:
+  - label: 개최 공고문
+    file: /general_meeting/document/ggd_gm_notice(250309).pdf
+  - label: 의사록
+    file: /general_meeting/document/ggd_gm_minutes(250309).pdf
+- date: 2024-11-26
+  name: 임시총회
+  docs:
+  - label: 개최 공고문
+    file: /general_meeting/document/ggd_gm_notice(241112).pdf
+  - label: 의사록
+    file: /general_meeting/document/ggd_gm_minutes(241126).pdf
+- date: 2024-08-27
+  name: 임시총회
+  docs:
+  - label: 개최 공고문
+    file: /general_meeting/document/ggd_gm_notice(240813).pdf
+  - label: 의사록
+    file: /general_meeting/document/ggd_gm_minutes(240827).pdf
+- date: 2024-03-26
+  name: 제1회 정기총회
+  docs:
+  - label: 개최 공고문
+    file: /general_meeting/document/ggd_gm_notice.pdf
+  - label: 의사록
+    file: /general_meeting/document/ggd_gm_minutes.pdf
+- date: 2023-09-19
+  name: 창립총회
+  docs:
+  - label: 개최 공고문
+    file: /general_meeting/document/ggd_founding_notice(0911).pdf
+  - label: 의사록
+    file: /general_meeting/document/ggd_founding_notarization.pdf

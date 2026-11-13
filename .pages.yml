@@ -1,0 +1,181 @@
+# Pages CMS 설정 — https://app.pagescms.org 에서 이 레포를 열면 아래 메뉴가 보임
+media: uploads
+
+content:
+  - name: posts
+    label: 소식
+    type: collection
+    path: _posts
+    filename: "{year}-{month}-{day}-{fields.slug}.md"
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: 제목
+        type: string
+        required: true
+      - name: slug
+        label: 주소용 이름 (영문 소문자와 - 만, 예 winter-live)
+        type: string
+        required: true
+      - name: date
+        label: 날짜
+        type: date
+        required: true
+      - name: author
+        label: 글쓴이
+        type: string
+      - name: image
+        label: 대표 사진
+        type: image
+      - name: body
+        label: 본문
+        type: rich-text
+
+  - name: info
+    label: 조합 정보
+    type: group
+    items:
+      - name: site
+        label: 기본 정보 (슬로건·연락처)
+        type: file
+        path: _data/site.yml
+        fields:
+          - { name: name, label: 이름, type: string }
+          - { name: name_en, label: 영문 이름, type: string }
+          - { name: tagline, label: 슬로건 (줄바꿈 그대로 보임), type: text }
+          - { name: welcome, label: 조합원 안내 한 줄, type: string }
+          - { name: email, label: 이메일, type: string }
+          - { name: address, label: 주소, type: string }
+          - { name: instagram, label: 인스타그램 주소, type: string }
+          - { name: corp_no, label: 법인등록번호, type: string }
+          - { name: biz_no, label: 사업자등록번호, type: string }
+          - { name: join_text, label: 가입·탈퇴 안내, type: text }
+          - { name: garage, label: 거라지 상태 문구, type: string }
+          - { name: geogisa, label: 거기사 상태 문구, type: string }
+
+      - name: members
+        label: 명예의 전당 (조합원 명단)
+        type: file
+        path: _data/members.yml
+        list: true
+        fields:
+          - { name: name, label: 이름, type: string, required: true }
+
+      - name: org
+        label: 조직도
+        type: file
+        path: _data/org.yml
+        fields:
+          - name: people
+            label: 사람
+            type: object
+            list: true
+            fields:
+              - { name: role, label: 역할, type: string }
+              - { name: name, label: 이름, type: string }
+          - { name: image, label: 조직도 그림, type: image }
+
+      - name: meetings
+        label: 총회
+        type: file
+        path: _data/meetings.yml
+        list: true
+        fields:
+          - { name: date, label: 날짜, type: date, required: true }
+          - { name: name, label: 이름 (예 제3회 정기총회), type: string, required: true }
+          - { name: note, label: 한 줄 메모, type: string }
+          - name: docs
+            label: 문서
+            type: object
+            list: true
+            fields:
+              - { name: label, label: 문서 이름 (개최 공고문, 의사록 등), type: string }
+              - { name: file, label: PDF, type: file }
+
+  - name: docs
+    label: 정관·규약
+    type: group
+    items:
+      - name: chapters
+        label: 정관
+        type: collection
+        path: _chapters
+        view:
+          fields: [label, title]
+          primary: title
+          default:
+            sort: order
+            order: asc
+        fields:
+          - { name: order, label: 순서, type: number }
+          - { name: label, label: 장 번호 (예 제1장), type: string }
+          - { name: title, label: 장 이름, type: string }
+          - name: articles
+            label: 조문
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{num} {title}"
+            fields:
+              - { name: num, label: 조 번호 (예 제18조의2), type: string }
+              - { name: title, label: 조 제목, type: string }
+              - { name: body, label: 본문 (한 줄에 한 항씩), type: text }
+          - { name: note, label: 덧붙임, type: text }
+
+      - name: rules
+        label: 규약 PDF
+        type: file
+        path: _data/rules.yml
+        list: true
+        fields:
+          - { name: title, label: 규약 이름, type: string, required: true }
+          - { name: file, label: PDF, type: file, required: true }
+
+  - name: listen
+    label: 듣기·사진
+    type: group
+    items:
+      - name: radio
+        label: 범골라디오
+        type: file
+        path: _data/radio.yml
+        list: true
+        fields:
+          - { name: date, label: 방송일, type: date, required: true }
+          - { name: title, label: 제목, type: string }
+          - { name: link, label: 듣기 링크, type: string, required: true }
+
+      - name: listen_photos
+        label: 들어볼거거덩 사진
+        type: file
+        path: _data/listen.yml
+        fields:
+          - { name: intro, label: 소개, type: string }
+          - name: photos
+            label: 사진
+            type: object
+            list: true
+            fields:
+              - { name: image, label: 사진, type: image }
+              - { name: caption, label: 설명, type: string }
+
+      - name: record_market
+        label: 레코드마켓
+        type: file
+        path: _data/record_market.yml
+        fields:
+          - { name: intro, label: 안내 글, type: text }
+          - name: photos
+            label: 사진
+            type: object
+            list: true
+            fields:
+              - { name: image, label: 사진, type: image }
+              - { name: caption, label: 설명, type: string }

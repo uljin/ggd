@@ -1,94 +1,70 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GGD Cooperative — 거거덩 협동조합</title>
-<meta name="description" content="맨땅에 생음악 심어 아름다운 음악도시 만들기 — 거거덩 협동조합">
-<link rel="stylesheet" href="style.css">
-<link rel="icon" href="images/ggd_stamp_paper.JPG">
-</head>
-<body id="top">
-<header class="top">
-  <a href="index.html">GGD Cooperative</a>
-  <nav><a href="chapter/first.html" class="hide-m">정관</a><a href="index.html#rules" class="hide-m">규약</a><a href="listen_to_ggd/listen_to_ggd.html">듣기</a><a href="#contact">연락</a></nav>
-</header>
-
+---
+layout: base
+title: 거거덩 협동조합
+---
+{% assign s = site.data.site %}
 <div class="mast">
-  <h1><img src="images/ggd_logo.JPG" alt="거거덩"><span>GGD Cooperative</span></h1>
+  <h1><img src="{{ '/images/ggd_logo.JPG' | relative_url }}" alt="거거덩"><span>{{ s.name_en }}</span></h1>
   <div class="plane">
-    <p>거거덩 협동조합<br>Seoul, KR</p>
-    <strong>맨땅에 생음악 심어<br>아름다운 음악도시<br>만들기</strong>
+    <p>{{ s.name }}<br>Seoul, KR</p>
+    <strong>{{ s.tagline | escape | newline_to_br }}</strong>
   </div>
 </div>
 
 <div class="intro">
-  <div><b>조합원</b>누구나 Welcome</div>
-  <div><b>주사무소</b>서대문구 연희로 177, 202호</div>
-  <div><b>문의</b><a href="mailto:official@ggdcoop.com">official@ggdcoop.com</a></div>
+  <div><b>조합원</b>{{ s.welcome }}</div>
+  <div><b>주사무소</b>{{ s.address | remove: "서울시 " }}</div>
+  <div><b>문의</b><a href="mailto:{{ s.email }}">{{ s.email }}</a></div>
 </div>
+
+{% if site.posts.size > 0 %}
+<section id="news">
+  <header><span class="no">00</span><h2>소식</h2><p><a href="{{ '/news/' | relative_url }}">전체 보기 →</a></p></header>
+  <ul class="rows body">
+    {% for p in site.posts limit: 3 %}
+    <li><a href="{{ p.url | relative_url }}"><span class="n">{{ p.date | date: "%m.%d" }}</span><span>{{ p.title }}</span><span class="meta">→</span></a></li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
 
 <section>
   <header><span class="no">01</span><h2>조합</h2></header>
   <ul class="rows body">
-    <li><a href="hall_of_fame/hall_of_fame.html"><span class="n">A</span><span>명예의 전당</span><span class="meta">→</span></a></li>
-    <li><a href="general_meeting/gm.html"><span class="n">B</span><span>총회</span><span class="meta">→</span></a></li>
-    <li><a href="org/org.html"><span class="n">C</span><span>조직도</span><span class="meta">→</span></a></li>
-    <li><a href="record_market/record_market.html"><span class="n">D</span><span>레코드마켓</span><span class="meta">→</span></a></li>
-    <li><div class="row off"><span class="n">E</span><span>거라지</span><span class="meta">준비 중</span></div></li>
-    <li><div class="row off"><span class="n">F</span><span>거기사</span><span class="meta">준비 중</span></div></li>
+    <li><a href="{{ '/hall_of_fame/hall_of_fame.html' | relative_url }}"><span class="n">A</span><span>명예의 전당</span><span class="meta">→</span></a></li>
+    <li><a href="{{ '/general_meeting/gm.html' | relative_url }}"><span class="n">B</span><span>총회</span><span class="meta">→</span></a></li>
+    <li><a href="{{ '/org/org.html' | relative_url }}"><span class="n">C</span><span>조직도</span><span class="meta">→</span></a></li>
+    <li><a href="{{ '/record_market/record_market.html' | relative_url }}"><span class="n">D</span><span>레코드마켓</span><span class="meta">→</span></a></li>
+    <li><div class="row off"><span class="n">E</span><span>거라지</span><span class="meta">{{ s.garage }}</span></div></li>
+    <li><div class="row off"><span class="n">F</span><span>거기사</span><span class="meta">{{ s.geogisa }}</span></div></li>
   </ul>
 </section>
 
+{% assign chapters = site.chapters | sort: "order" %}
 <section id="articles">
   <header><span class="no">02</span><h2>정관</h2><p>8장과 부칙</p></header>
   <div class="grid2 body">
-    <a href="chapter/first.html"><span class="n">제1장</span><span class="t">총칙</span></a>
-    <a href="chapter/second.html"><span class="n">제2장</span><span class="t">조합원</span></a>
-    <a href="chapter/third.html"><span class="n">제3장</span><span class="t">출자와 경비부담 및 적립금</span></a>
-    <a href="chapter/fourth.html"><span class="n">제4장</span><span class="t">총회와 이사회</span></a>
-    <a href="chapter/fifth.html"><span class="n">제5장</span><span class="t">임원과 직원</span></a>
-    <a href="chapter/sixth.html"><span class="n">제6장</span><span class="t">사업과 집행</span></a>
-    <a href="chapter/seventh.html"><span class="n">제7장</span><span class="t">회계</span></a>
-    <a href="chapter/eighth.html"><span class="n">제8장</span><span class="t">합병 분할 및 해산</span></a>
-    <a href="chapter/ninth.html" class="wide"><span class="n">부칙</span><span class="t">부칙</span></a>
+    {% for c in chapters %}
+    <a href="{{ c.url | relative_url }}"{% if forloop.last %} class="wide"{% endif %}><span class="n">{{ c.label }}</span><span class="t">{{ c.title }}</span></a>
+    {% endfor %}
   </div>
 </section>
 
 <section id="rules">
   <header><span class="no">03</span><h2>규약</h2><p>PDF 문서</p></header>
   <ol class="rows body">
-    <li><a href="rules0326/ggd_rules_1.pdf"><span class="n">01</span><span>조합원 자격</span><span class="meta">PDF ↓</span></a></li>
-    <li><a href="rules0326/ggd_rules_2.pdf"><span class="n">02</span><span>조합원 제명</span><span class="meta">PDF ↓</span></a></li>
-    <li><a href="rules0326/ggd_rules_3.pdf"><span class="n">03</span><span>총회 운영</span><span class="meta">PDF ↓</span></a></li>
-    <li><a href="rules0326/ggd_rules_4.pdf"><span class="n">04</span><span>이사회 운영</span><span class="meta">PDF ↓</span></a></li>
-    <li><a href="rules0326/ggd_rules_5.pdf"><span class="n">05</span><span>감사</span><span class="meta">PDF ↓</span></a></li>
-    <li><a href="rules0326/ggd_rules_6.pdf"><span class="n">06</span><span>잉여금 배당</span><span class="meta">PDF ↓</span></a></li>
-    <li><a href="rules0326/ggd_rules_7.pdf"><span class="n">07</span><span>경비 및 사용료와 수수료</span><span class="meta">PDF ↓</span></a></li>
-    <li><a href="rules0326/ggd_rules_8.pdf"><span class="n">08</span><span>과태금</span><span class="meta">PDF ↓</span></a></li>
+    {% for r in site.data.rules %}
+    <li><a href="{{ r.file | relative_url }}"><span class="n">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span><span>{{ r.title }}</span><span class="meta">PDF ↓</span></a></li>
+    {% endfor %}
   </ol>
 </section>
 
 <section id="listen" class="dark">
   <header><span class="no">04</span><h2>들어볼거거덩</h2><p>범골라디오</p></header>
   <ol class="rows body">
-    <li><a href="https://drive.google.com/file/d/1M0GwWTRP3-Joka_NkJ7TpvRG_SWE4TOv/view?usp=drive_link"><span class="n">#1</span><span>범골라디오</span><span class="meta">2025.04.29 ▶</span></a></li>
-    <li><a href="https://drive.google.com/file/d/1o93heAZjC60vn1Ss4eAdMjOlwMzNASe-/view?usp=drive_link"><span class="n">#2</span><span>범골라디오</span><span class="meta">2025.05.27 ▶</span></a></li>
-    <li><a href="https://drive.google.com/file/d/1POAC7cz1Pi8IZCs85ToqYYyAzbvCZKot/view?usp=sharing"><span class="n">#3</span><span>범골라디오</span><span class="meta">2025.07.01 ▶</span></a></li>
-    <li><a href="https://drive.google.com/file/d/1qkjoqDrN_iceVz94blNA_6sZV-IiDeHA/view?usp=sharing"><span class="n">#4</span><span>범골라디오</span><span class="meta">2025.07.29 ▶</span></a></li>
-    <li><a href="listen_to_ggd/listen_to_ggd.html"><span class="n">+</span><span>전체 보기</span><span class="meta">→</span></a></li>
+    {% for r in site.data.radio %}
+    <li><a href="{{ r.link }}"><span class="n">#{{ forloop.index }}</span><span>{{ r.title }}</span><span class="meta">{{ r.date | date: "%Y.%m.%d" }} ▶</span></a></li>
+    {% endfor %}
+    <li><a href="{{ '/listen_to_ggd/listen_to_ggd.html' | relative_url }}"><span class="n">+</span><span>전체 보기</span><span class="meta">→</span></a></li>
   </ol>
 </section>
-
-<footer id="contact">
-  <div>
-    <a class="big" href="mailto:official@ggdcoop.com">official@ggdcoop.com</a>
-    서울시 서대문구 연희로 177, 202호<br>
-    <a href="https://www.instagram.com/ggdcoop/">Instagram @ggdcoop</a>
-  </div>
-  <div>법인등록번호<br>270151-0037941</div>
-  <div>사업자등록번호<br>531-87-03201<a class="stamp" href="index.html"><img src="images/ggd_stamp_paper.JPG" alt="거거덩 협동조합 도장" width="96"></a></div>
-</footer>
-
-</body>
-</html>

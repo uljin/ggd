@@ -1,0 +1,57 @@
+---
+layout: base
+---
+{% assign chapters = site.chapters | sort: "order" %}
+{% for c in chapters %}{% if c.url == page.url %}{% assign i = forloop.index0 %}{% endif %}{% endfor %}
+{% assign prev_i = i | minus: 1 %}{% assign next_i = i | plus: 1 %}
+
+<div class="pagehead">
+  <div class="crumb"><a href="{{ '/' | relative_url }}">← 처음으로</a><span>정관</span></div>
+  <h1><small>거거덩 협동조합 정관{% if page.label != page.title %} · {{ page.label }}{% endif %}</small>{{ page.title }}</h1>
+</div>
+
+<section>
+  <header><span class="no">목차</span><h2>{{ page.label }}</h2><p>{{ page.articles.size }}개 조</p></header>
+  <ol class="rows toc body">
+    {% for a in page.articles %}
+    {% assign aid = a.num | remove: "제" | replace: "조의", "-" | remove: "조" %}
+    <li><a href="#a{{ aid }}"><span class="n">{{ a.num }}</span><span>{{ a.title }}</span><span class="meta">↓</span></a></li>
+    {% endfor %}
+  </ol>
+</section>
+
+<section>
+  <header><span class="no">조문</span><h2>{{ page.title }}</h2></header>
+  <div class="articles body">
+    {% for a in page.articles %}
+    {% assign aid = a.num | remove: "제" | replace: "조의", "-" | remove: "조" %}
+    <article id="a{{ aid }}">
+      <h3><span class="n">{{ a.num }}</span><span>{{ a.title }}</span></h3>
+      <div class="text">
+        {% assign lines = a.body | strip | newline_to_br | split: "<br />" %}
+        {% for l in lines %}{% assign t = l | strip %}{% if t != "" %}{% assign c = t | slice: 0 %}
+        <p{% if "0123456789" contains c %} class="item"{% endif %}>{{ t | escape }}</p>
+        {% endif %}{% endfor %}
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% if page.note %}
+<section>
+  <header><span class="no">덧붙임</span></header>
+  <div class="body prose"><p>{{ page.note | escape }}</p></div>
+</section>
+{% endif %}
+
+<nav class="pager">
+  {% if i > 0 %}{% assign p = chapters[prev_i] %}
+  <a href="{{ p.url | relative_url }}"><small>← {{ p.label }}</small><b>{{ p.title }}</b></a>
+  {% else %}<span></span>{% endif %}
+  {% if next_i < chapters.size %}{% assign n = chapters[next_i] %}
+  <a class="next" href="{{ n.url | relative_url }}"><small>{{ n.label }} →</small><b>{{ n.title }}</b></a>
+  {% else %}
+  <a class="next" href="{{ '/#rules' | relative_url }}"><small>다음 →</small><b>규약</b></a>
+  {% endif %}
+</nav>

@@ -1,50 +1,25 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>조직도 — 거거덩 협동조합</title>
-<meta name="description" content="맨땅에 생음악 심어 아름다운 음악도시 만들기 — 거거덩 협동조합">
-<link rel="stylesheet" href="../style.css">
-<link rel="icon" href="../images/ggd_stamp_paper.JPG">
-</head>
-<body id="top">
-<header class="top">
-  <a href="../index.html">GGD Cooperative</a>
-  <nav><a href="../chapter/first.html" class="hide-m">정관</a><a href="../index.html#rules" class="hide-m">규약</a><a href="../listen_to_ggd/listen_to_ggd.html">듣기</a><a href="#contact">연락</a></nav>
-</header>
-<div class="pagehead">
-  <div class="crumb"><a href="../index.html">← 처음으로</a><span>조합</span></div>
-  <h1><small>누가 뭘 맡았나</small>조직도</h1>
-</div>
-
+---
+layout: base
+title: 조직도
+heading: 조직도
+sub: 누가 뭘 맡았나
+crumb: 조합
+---
+{% assign org = site.data.org %}
 <section>
   <header><span class="no">01</span><h2>임원과 직원</h2></header>
   <ul class="roles body">
-    <li><span class="role">이사장</span><span>김채현</span></li>
-    <li><span class="role">크리에이티브이사</span><span>이주현</span></li>
-    <li><span class="role">소통이사</span><span>박종현</span></li>
-    <li><span class="role">감사</span><span>정종현</span></li>
-    <li><span class="role">운영국장</span><span>안홍인</span></li>
+    {% for p in org.people %}
+    <li><span class="role">{{ p.role }}</span><span>{{ p.name }}</span></li>
+    {% endfor %}
   </ul>
 </section>
 
+{% if org.image %}
 <section>
   <header><span class="no">02</span><h2>그림으로</h2></header>
-  <div class="body gallery contain" style="grid-template-columns:1fr">
-    <figure style="border-right:0;border-bottom:0"><img src="../org/images/ggd_org.png" alt="거거덩 협동조합 조직도" loading="lazy"></figure>
+  <div class="body gallery contain one">
+    <figure><img src="{{ org.image | relative_url }}" alt="거거덩 협동조합 조직도" loading="lazy"></figure>
   </div>
 </section>
-
-<footer id="contact">
-  <div>
-    <a class="big" href="mailto:official@ggdcoop.com">official@ggdcoop.com</a>
-    서울시 서대문구 연희로 177, 202호<br>
-    <a href="https://www.instagram.com/ggdcoop/">Instagram @ggdcoop</a>
-  </div>
-  <div>법인등록번호<br>270151-0037941</div>
-  <div>사업자등록번호<br>531-87-03201<a class="stamp" href="../index.html"><img src="../images/ggd_stamp_paper.JPG" alt="거거덩 협동조합 도장" width="96"></a></div>
-</footer>
-
-</body>
-</html>
+{% endif %}

@@ -1,0 +1,12 @@
+people:
+- role: 이사장
+  name: 김채현
+- role: 크리에이티브이사
+  name: 이주현
+- role: 소통이사
+  name: 박종현
+- role: 감사
+  name: 정종현
+- role: 운영국장
+  name: 안홍인
+image: /org/images/ggd_org.png

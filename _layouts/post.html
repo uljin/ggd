@@ -1,0 +1,23 @@
+---
+layout: base
+---
+<div class="pagehead">
+  <div class="crumb"><a href="{{ '/news/' | relative_url }}">← 소식</a><span>{{ page.date | date: "%Y.%m.%d" }}</span></div>
+  <h1>{{ page.title }}</h1>
+</div>
+
+{% if page.image %}
+<div class="hero"><img src="{{ page.image | relative_url }}" alt=""></div>
+{% endif %}
+
+<section>
+  <header><span class="no">{{ page.date | date: "%Y.%m.%d" }}</span>{% if page.author %}<p>글 {{ page.author }}</p>{% endif %}</header>
+  <div class="body prose post">
+    {{ content }}
+  </div>
+</section>
+
+<nav class="pager">
+  {% if page.previous %}<a href="{{ page.previous.url | relative_url }}"><small>← 이전 소식</small><b>{{ page.previous.title }}</b></a>{% else %}<span></span>{% endif %}
+  {% if page.next %}<a class="next" href="{{ page.next.url | relative_url }}"><small>다음 소식 →</small><b>{{ page.next.title }}</b></a>{% else %}<span></span>{% endif %}
+</nav>
