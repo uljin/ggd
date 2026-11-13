@@ -327,3 +327,7 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
     cursor: image-set(url("images/cursor-o-link.png") 1x, url("images/cursor-o-link@2x.png") 2x) 16 16, pointer;
   }
 }
+
+/* 상단 인스타그램 칸: 초록 면 */
+.top nav a.ig { background: var(--plane); }
+.top nav a.ig:hover { background: var(--ink); color: var(--paper); }
