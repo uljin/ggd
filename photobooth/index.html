@@ -30,8 +30,8 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
     </div>
     <div class="booth-frames" role="radiogroup" aria-label="모양">
       <span>모양</span>
-      <button type="button" data-layout="grid" aria-pressed="true">2×2</button>
-      <button type="button" data-layout="poster" aria-pressed="false">띠 + 포스터</button>
+      <button type="button" data-layout="strip" aria-pressed="true">네컷 띠</button>
+      <button type="button" data-layout="grid" aria-pressed="false">2×2</button>
     </div>
     <div class="booth-actions">
       <button type="button" class="b-save" hidden>저장 ↓</button>
@@ -48,7 +48,7 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
   var count = root.querySelector(".booth-count"), flash = root.querySelector(".booth-flash"), msg = root.querySelector(".booth-msg");
   var thumbs = root.querySelector(".booth-thumbs");
   var btn = function (c) { return root.querySelector(".b-" + c); };
-  var shots = [], stream = null, frame = "paper", layout = "grid";
+  var shots = [], stream = null, frame = "paper", layout = "strip";
   var logo = new Image(); logo.src = "{{ '/images/ggd_logo.JPG' | relative_url }}";
   var COLORS = { paper: "#f4f2ee", green: "#5cb96b" }, INK = "#111111";
   var W = 600, PAD = 30, GAP = 18, PW = W - PAD * 2, PH = Math.round(PW * 3 / 4), FOOT = 250;
@@ -100,14 +100,46 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
     return d.getFullYear() + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + String(d.getDate()).padStart(2, "0");
   }
 
-  function compose() {   // 결과는 언제나 정사각형 한 장
+  var BOARD = { paper: "#5cb96b", green: "#f4f2ee" };   // 띠 뒤 판은 틀과 반대 색
+
+  function compose() {
     if (!shots.length) return;
-    var S = 1080, R = 2;
-    out.width = S * R; out.height = S * R;
-    var x = out.getContext("2d"); x.setTransform(R, 0, 0, R, 0, 0);
-    x.fillStyle = COLORS[frame]; x.fillRect(0, 0, S, S);
-    if (layout === "grid") grid(x, S); else poster(x, S);
-    x.strokeStyle = INK; x.lineWidth = 6; x.strokeRect(3, 3, S - 6, S - 6);   // 테두리: 어디에 올려도 틀이 보이게
+    var R = 2;
+    if (layout === "strip") {           // 인스타 스토리 크기(9:16) 판 위에 세로 띠 한 장
+      var BW = 1080, BH = 1920;
+      out.width = BW * R; out.height = BH * R;
+      var x = out.getContext("2d"); x.setTransform(R, 0, 0, R, 0, 0);
+      x.fillStyle = BOARD[frame]; x.fillRect(0, 0, BW, BH);
+      var sh = BH - 240, sw = sh * W / H, sx = (BW - sw) / 2, sy = 110;
+      x.save(); x.translate(sx, sy); x.scale(sw / W, sh / H); strip(x); x.restore();
+      x.fillStyle = INK; x.font = "400 26px 'IBM Plex Sans KR', sans-serif"; x.textAlign = "center";
+      x.fillText("ggdcoop.com", BW / 2, BH - 52); x.textAlign = "left";
+    } else {                            // 정사각형 2×2
+      var S = 1080;
+      out.width = S * R; out.height = S * R;
+      var y = out.getContext("2d"); y.setTransform(R, 0, 0, R, 0, 0);
+      y.fillStyle = COLORS[frame]; y.fillRect(0, 0, S, S);
+      grid(y, S);
+      y.strokeStyle = INK; y.lineWidth = 6; y.strokeRect(3, 3, S - 6, S - 6);
+    }
+  }
+
+  function strip(x) {   // 세로 네 컷 띠 (W × H 좌표계)
+    x.fillStyle = COLORS[frame]; x.fillRect(0, 0, W, H);
+    shots.forEach(function (s, i) {
+      var y = PAD + i * (PH + GAP);
+      x.drawImage(s, PAD, y, PW, PH);
+      x.strokeStyle = INK; x.lineWidth = 2; x.strokeRect(PAD, y, PW, PH);
+    });
+    var fy = PAD + PH * 4 + GAP * 3;
+    x.fillStyle = INK; x.fillRect(PAD, fy + 18, PW, 4);
+    x.globalCompositeOperation = "multiply";
+    var lw = 380, lh = lw * logo.naturalHeight / logo.naturalWidth;
+    x.drawImage(logo, PAD, fy + 46, lw, lh);
+    x.globalCompositeOperation = "source-over";
+    x.fillStyle = INK; x.font = "400 18px 'IBM Plex Sans KR', sans-serif";
+    x.fillText("GGD Cooperative · " + today(), PAD, H - PAD);
+    x.strokeStyle = INK; x.lineWidth = 4; x.strokeRect(2, 2, W - 4, H - 4);
   }
 
   function grid(x, S) {   // 2×2 네 컷 + 아래 로고 띠
@@ -127,26 +159,6 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
     x.font = "700 26px 'IBM Plex Sans KR', sans-serif"; x.fillText("GGD Cooperative", S - m, S - m - 34);
     x.font = "400 22px 'IBM Plex Sans KR', sans-serif"; x.fillText(today(), S - m, S - m);
     x.textAlign = "left";
-  }
-
-  function poster(x, S) {   // 왼쪽 세로 띠 + 오른쪽 포스터
-    var m = 56, g = 14, sh = S - m * 2, pw = (sh - g * 3) / 4 * 4 / 3, ph = pw * 3 / 4;
-    shots.forEach(function (s, i) {
-      var cy = m + i * (ph + g);
-      x.drawImage(s, m, cy, pw, ph);
-      x.strokeStyle = INK; x.lineWidth = 2; x.strokeRect(m, cy, pw, ph);
-    });
-    var rx = m + pw + 48, rw = S - rx - m;
-    x.fillStyle = INK; x.fillRect(rx - 24, m, 5, sh);
-    x.globalCompositeOperation = "multiply";
-    var lw = rw, lh = lw * logo.naturalHeight / logo.naturalWidth;
-    x.drawImage(logo, rx, m + 10, lw, lh);
-    x.globalCompositeOperation = "source-over";
-    x.fillStyle = INK;
-    x.font = "700 40px 'IBM Plex Sans KR', sans-serif";
-    ["맨땅에 생음악 심어", "아름다운 음악도시", "만들기"].forEach(function (t, i) { x.fillText(t, rx, S - m - 150 + i * 50); });
-    x.font = "400 22px 'IBM Plex Sans KR', sans-serif";
-    x.fillText("GGD Cooperative · " + today(), rx, S - m);
   }
 
   root.querySelectorAll("[data-layout]").forEach(function (b) {
