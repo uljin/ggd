@@ -6,7 +6,7 @@ layout: base
 {% assign prev_i = i | minus: 1 %}{% assign next_i = i | plus: 1 %}
 
 <div class="pagehead">
-  <div class="crumb"><a href="{{ '/' | relative_url }}">← 처음으로</a><span>정관</span></div>
+  <div class="crumb"><a href="{{ '/' | relative_url }}">← 처음으로</a><a href="{{ '/articles/' | relative_url }}">정관·규약</a></div>
   <h1><small>거거덩 협동조합 정관{% if page.label != page.title %} · {{ page.label }}{% endif %}</small>{{ page.title }}</h1>
 </div>
 
@@ -52,6 +52,6 @@ layout: base
   {% if next_i < chapters.size %}{% assign n = chapters[next_i] %}
   <a class="next" href="{{ n.url | relative_url }}"><small>{{ n.label }} →</small><b>{{ n.title }}</b></a>
   {% else %}
-  <a class="next" href="{{ '/#rules' | relative_url }}"><small>다음 →</small><b>규약</b></a>
+  <a class="next" href="{{ '/articles/#rules' | relative_url }}"><small>다음 →</small><b>규약</b></a>
   {% endif %}
 </nav>

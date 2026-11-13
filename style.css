@@ -322,3 +322,36 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 /* 상단 인스타그램 칸: 초록 면 */
 .top nav a.ig { background: var(--plane); }
 .top nav a.ig:hover { background: var(--ink); color: var(--paper); }
+
+/* ── 첫 화면: 로고 표지 + 큰 메뉴 ── */
+.cover {
+  min-height: calc(100vh - 38px - 66px - 6 * 62px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 14px 14px;
+  border-bottom: var(--thick);
+}
+.cover h1 { margin: 0; }
+.cover h1 img { width: min(70%, 760px); mix-blend-mode: multiply; }
+.cover p { font-size: 13px; }
+.menu a {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 14px;
+  border-top: var(--line);
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.1;
+}
+.menu a span { font-size: 12px; font-weight: 400; letter-spacing: 0; white-space: nowrap; }
+.menu a:hover { background: var(--plane); }
+.menu + footer { border-top: var(--line); }
+@media (max-width: 720px) {
+  .cover { min-height: 0; padding-bottom: 18px; }
+  .cover h1 img { width: 88%; }
+}

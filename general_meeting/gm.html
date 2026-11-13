@@ -1,9 +1,19 @@
 ---
 layout: base
-title: 총회
-heading: 총회
+title: 총회·조직
+heading: 총회·조직
 crumb: 조합
 ---
+{% assign org = site.data.org %}
+<section id="org">
+  <header><span class="no">조직</span><h2>누가 뭘 맡았나</h2>{% if org.image %}<p><a href="{{ '/org/org.html' | relative_url }}">조직도 그림 →</a></p>{% endif %}</header>
+  <ul class="roles body">
+    {% for p in org.people %}
+    <li><span class="role">{{ p.role }}</span><span>{{ p.name }}</span></li>
+    {% endfor %}
+  </ul>
+</section>
+
 {% assign meetings = site.data.meetings | sort: "date" | reverse %}
 {% for m in meetings %}
 <section>

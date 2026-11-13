@@ -3,12 +3,9 @@ layout: base
 title: 거거덩 협동조합
 ---
 {% assign s = site.data.site %}
-<div class="mast">
-  <h1><img src="{{ '/images/ggd_logo.JPG' | relative_url }}" alt="거거덩"><span>{{ s.name_en }}</span></h1>
-  <div class="plane">
-    <p>{{ s.name }}<br>Seoul, KR</p>
-    <strong>{{ s.tagline | escape | newline_to_br }}</strong>
-  </div>
+<div class="cover">
+  <h1><img src="{{ '/images/ggd_logo.JPG' | relative_url }}" alt="거거덩"></h1>
+  <p>{{ s.name_en }} · {{ s.name }} · {{ s.tagline | newline_to_br | replace: "<br />", " " | strip_newlines }}</p>
 </div>
 
 <div class="intro">
@@ -17,54 +14,11 @@ title: 거거덩 협동조합
   <div><b>문의</b><a href="mailto:{{ s.email }}">{{ s.email }}</a></div>
 </div>
 
-{% if site.posts.size > 0 %}
-<section id="news">
-  <header><span class="no">00</span><h2>소식</h2><p><a href="{{ '/news/' | relative_url }}">전체 보기 →</a></p></header>
-  <ul class="rows body">
-    {% for p in site.posts limit: 3 %}
-    <li><a href="{{ p.url | relative_url }}"><span class="n">{{ p.date | date: "%m.%d" }}</span><span>{{ p.title }}</span><span class="meta">→</span></a></li>
-    {% endfor %}
-  </ul>
-</section>
-{% endif %}
-
-<section>
-  <header><span class="no">01</span><h2>조합</h2></header>
-  <ul class="rows body">
-    <li><a href="{{ '/hall_of_fame/hall_of_fame.html' | relative_url }}"><span class="n">A</span><span>명예의 전당</span><span class="meta">→</span></a></li>
-    <li><a href="{{ '/general_meeting/gm.html' | relative_url }}"><span class="n">B</span><span>총회</span><span class="meta">→</span></a></li>
-    <li><a href="{{ '/org/org.html' | relative_url }}"><span class="n">C</span><span>조직도</span><span class="meta">→</span></a></li>
-    <li><a href="{{ '/record_market/record_market.html' | relative_url }}"><span class="n">D</span><span>레코드마켓</span><span class="meta">→</span></a></li>
-    <li><div class="row off"><span class="n">E</span><span>거라지</span><span class="meta">{{ s.garage }}</span></div></li>
-    <li><div class="row off"><span class="n">F</span><span>거기사</span><span class="meta">{{ s.geogisa }}</span></div></li>
-  </ul>
-</section>
-
-{% assign chapters = site.chapters | sort: "order" %}
-<section id="articles">
-  <header><span class="no">02</span><h2>정관</h2><p>8장과 부칙</p></header>
-  <div class="grid2 body">
-    {% for c in chapters %}
-    <a href="{{ c.url | relative_url }}"{% if forloop.last %} class="wide"{% endif %}><span class="n">{{ c.label }}</span><span class="t">{{ c.title }}</span></a>
-    {% endfor %}
-  </div>
-</section>
-
-<section id="rules">
-  <header><span class="no">03</span><h2>규약</h2><p>PDF 문서</p></header>
-  <ol class="rows body">
-    {% for r in site.data.rules %}
-    <li><a href="{{ r.file | relative_url }}"><span class="n">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span><span>{{ r.title }}</span><span class="meta">PDF ↓</span></a></li>
-    {% endfor %}
-  </ol>
-</section>
-
-<section id="listen" class="dark">
-  <header><span class="no">04</span><h2>들어볼거거덩</h2><p>범골라디오</p></header>
-  <ol class="rows body">
-    {% for r in site.data.radio %}
-    <li><a href="{{ r.link }}"><span class="n">#{{ forloop.index }}</span><span>{{ r.title }}</span><span class="meta">{{ r.date | date: "%Y.%m.%d" }} ▶</span></a></li>
-    {% endfor %}
-    <li><a href="{{ '/listen_to_ggd/listen_to_ggd.html' | relative_url }}"><span class="n">+</span><span>전체 보기</span><span class="meta">→</span></a></li>
-  </ol>
-</section>
+<nav class="menu" aria-label="메뉴">
+  <a href="{{ '/news/' | relative_url }}">소식<span>01 →</span></a>
+  <a href="{{ '/hall_of_fame/hall_of_fame.html' | relative_url }}">명예의 전당<span>02 →</span></a>
+  <a href="{{ '/general_meeting/gm.html' | relative_url }}">총회·조직<span>03 →</span></a>
+  <a href="{{ '/articles/' | relative_url }}">정관·규약<span>04 →</span></a>
+  <a href="{{ '/listen_to_ggd/listen_to_ggd.html' | relative_url }}">들어볼거거덩<span>05 →</span></a>
+  <a href="{{ '/record_market/record_market.html' | relative_url }}">레코드마켓<span>06 →</span></a>
+</nav>

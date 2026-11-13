@@ -1,0 +1,26 @@
+---
+layout: base
+title: 정관·규약
+heading: 정관·규약
+sub: 거거덩 협동조합의 약속
+crumb: 조합
+nav: articles
+---
+{% assign chapters = site.chapters | sort: "order" %}
+<section id="articles">
+  <header><span class="no">01</span><h2>정관</h2><p>8장과 부칙</p></header>
+  <div class="grid2 body">
+    {% for c in chapters %}
+    <a href="{{ c.url | relative_url }}"{% if forloop.last %} class="wide"{% endif %}><span class="n">{{ c.label }}</span><span class="t">{{ c.title }}</span></a>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="rules">
+  <header><span class="no">02</span><h2>규약</h2><p>PDF 문서</p></header>
+  <ol class="rows body">
+    {% for r in site.data.rules %}
+    <li><a href="{{ r.file | relative_url }}"><span class="n">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span><span>{{ r.title }}</span><span class="meta">PDF ↓</span></a></li>
+    {% endfor %}
+  </ol>
+</section>
