@@ -346,7 +346,7 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 .cover {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  min-height: calc(100vh - 38px - 66px - 7 * 62px);
+  min-height: calc(100vh - 38px - 66px - 9 * 62px);
   border-bottom: var(--thick);
 }
 .cover h1 {
@@ -370,7 +370,7 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 }
 .cover .plane p { font-size: 13px; }
 .cover .plane strong { font-size: clamp(20px, 3vw, 32px); line-height: 1.2; font-weight: 700; letter-spacing: -.02em; }
-.menu a {
+.menu a, .menu .off {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
@@ -382,7 +382,7 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
   letter-spacing: -.03em;
   line-height: 1.1;
 }
-.menu a span { font-size: 12px; font-weight: 400; letter-spacing: 0; white-space: nowrap; }
+.menu a span, .menu .off span { font-size: 12px; font-weight: 400; letter-spacing: 0; white-space: nowrap; }
 .menu a:hover { background: var(--plane); }
 .menu + footer { border-top: var(--line); }
 @media (max-width: 720px) {
@@ -430,3 +430,20 @@ body > footer { margin-top: auto; border-top: var(--line); }
 .articles .text .item2 { padding-left: 2.4em; text-indent: -1.2em; margin-top: .2em; }
 .articles .text.plain .item { padding-left: 0; text-indent: 0; font-weight: 700; margin-top: .8em; }
 .articles .text.plain { padding-left: 14px; padding-top: 14px; }
+
+/* 메뉴의 준비 중 줄 */
+.menu .off { color: #b4b0a8; }
+.menu .off span { color: var(--mute); }
+
+/* ── 404 ── */
+.nothing {
+  background: var(--plane);
+  border-bottom: var(--thick);
+  padding: 28px 14px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.nothing .code { font-size: clamp(88px, 20vw, 220px); font-weight: 700; line-height: .85; letter-spacing: -.05em; }
+.nothing h1 { font-size: clamp(28px, 4vw, 48px); line-height: 1.15; letter-spacing: -.03em; }
+.nothing p:last-child { font-size: 13px; }
