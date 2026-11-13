@@ -5,173 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GGD Cooperative — 거거덩 협동조합</title>
 <meta name="description" content="맨땅에 생음악 심어 아름다운 음악도시 만들기 — 거거덩 협동조합">
-<style>
-:root {
-  --ink: #111;
-  --paper: #f4f2ee;
-  --plane: #ff4a1c;   /* 강조 면은 이 색 하나만 */
-  --line: 1px solid var(--ink);
-  --thick: 6px solid var(--ink);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { background: var(--paper); color: var(--ink); }
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  font-size: 15px;
-  line-height: 1.5;
-  word-break: keep-all;
-  max-width: 1200px;
-  margin: 0 auto;
-  border-left: var(--line);
-  border-right: var(--line);
-  min-height: 100vh;
-}
-a { color: inherit; text-decoration: none; }
-ol, ul { list-style: none; }
-
-/* ── 상단 ── */
-.top {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: var(--line);
-  font-size: 12px;
-  letter-spacing: .02em;
-}
-.top span, .top a { padding: 10px 14px; }
-.top a { border-left: var(--line); }
-.top a:hover { background: var(--ink); color: var(--paper); }
-
-/* ── 마스트헤드 ── */
-.mast {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  border-bottom: var(--thick);
-}
-.mast h1 {
-  font-size: clamp(88px, 24vw, 280px);
-  line-height: .82;
-  letter-spacing: -.06em;
-  font-weight: 700;
-  padding: 18px 14px 14px;
-  border-right: var(--line);
-}
-.mast .plane {
-  background: var(--plane);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 14px;
-}
-.mast .plane p { font-size: 13px; }
-.mast .plane strong {
-  font-size: clamp(20px, 3vw, 32px);
-  line-height: 1.15;
-  font-weight: 700;
-  letter-spacing: -.02em;
-}
-
-/* ── 인트로 줄 ── */
-.intro {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  border-bottom: var(--line);
-}
-.intro > * { padding: 14px; }
-.intro > * + * { border-left: var(--line); }
-.intro b { display: block; font-size: 12px; font-weight: 400; margin-bottom: 4px; }
-
-/* ── 섹션 공통 ── */
-section {
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  border-bottom: var(--line);
-}
-section > header {
-  padding: 14px;
-  border-right: var(--line);
-}
-section > header .no { font-size: 12px; display: block; margin-bottom: 6px; }
-section > header h2 { font-size: 22px; font-weight: 700; letter-spacing: -.02em; line-height: 1.15; }
-section > header p { font-size: 12px; margin-top: 8px; color: #555; }
-
-/* 행 리스트 */
-.rows li + li { border-top: var(--line); }
-.rows a, .rows .row {
-  display: grid;
-  grid-template-columns: 48px 1fr auto;
-  gap: 12px;
-  padding: 12px 14px;
-  align-items: baseline;
-}
-.rows a:hover { background: var(--ink); color: var(--paper); }
-.rows .n { font-size: 12px; font-variant-numeric: tabular-nums; }
-.rows .meta { font-size: 12px; font-variant-numeric: tabular-nums; }
-.rows .off { color: #999; }
-
-/* 정관: 2열 격자 */
-.grid2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.grid2 a {
-  padding: 14px;
-  min-height: 92px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-bottom: var(--line);
-}
-.grid2 a:nth-child(odd) { border-right: var(--line); }
-.grid2 a:nth-last-child(-n+1) { border-bottom: 0; }
-.grid2 a:hover { background: var(--plane); }
-.grid2 .n { font-size: 12px; }
-.grid2 .t { font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
-
-/* 라디오: 검은 면 */
-.radio { background: var(--ink); color: var(--paper); }
-.radio > header { border-right-color: var(--paper); }
-.radio > header p { color: #aaa; }
-.radio .rows li + li { border-top-color: #444; }
-.radio .rows a:hover { background: var(--plane); color: var(--ink); }
-
-/* ── 푸터 ── */
-footer {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  font-size: 12px;
-}
-footer > * { padding: 14px; }
-footer > * + * { border-left: var(--line); }
-footer a { text-decoration: underline; text-underline-offset: 3px; }
-footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-decoration: none; display: block; margin-bottom: 8px; }
-
-/* ── 모바일 ── */
-@media (max-width: 720px) {
-  .mast { grid-template-columns: 1fr; }
-  .mast h1 { border-right: 0; border-bottom: var(--line); }
-  .mast .plane { min-height: 160px; }
-  .intro { grid-template-columns: 1fr; }
-  .intro > * + * { border-left: 0; border-top: var(--line); }
-  section { grid-template-columns: 1fr; }
-  section > header { border-right: 0; border-bottom: var(--line); }
-  .radio > header { border-bottom-color: var(--paper); }
-  .top .hide-m { display: none; }
-  footer { grid-template-columns: 1fr; }
-  footer > * + * { border-left: 0; border-top: var(--line); }
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-<nav class="top">
-  <span>GGD Cooperative</span>
-  <div style="display:flex">
-    <a href="#articles" class="hide-m">정관</a>
-    <a href="#rules" class="hide-m">규약</a>
-    <a href="#listen">듣기</a>
-    <a href="#contact">연락</a>
-  </div>
-</nav>
+<body id="top">
+<header class="top">
+  <a href="index.html">GGD Cooperative</a>
+  <nav><a href="chapter/first.html" class="hide-m">정관</a><a href="index.html#rules" class="hide-m">규약</a><a href="listen_to_ggd/listen_to_ggd.html">듣기</a><a href="#contact">연락</a></nav>
+</header>
 
 <div class="mast">
   <h1>GGD</h1>
@@ -189,11 +29,11 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 
 <section>
   <header><span class="no">01</span><h2>조합</h2></header>
-  <ul class="rows">
-    <li><a href="https://ggdcoop.com/hall_of_fame/hall_of_fame.html"><span class="n">A</span><span>명예의 전당</span><span class="meta">→</span></a></li>
-    <li><a href="https://ggdcoop.com/general_meeting/gm.html"><span class="n">B</span><span>총회</span><span class="meta">→</span></a></li>
-    <li><a href="https://ggdcoop.com/org/org.html"><span class="n">C</span><span>조직도</span><span class="meta">→</span></a></li>
-    <li><a href="https://ggdcoop.com/record_market/record_market.html"><span class="n">D</span><span>레코드마켓</span><span class="meta">→</span></a></li>
+  <ul class="rows body">
+    <li><a href="hall_of_fame/hall_of_fame.html"><span class="n">A</span><span>명예의 전당</span><span class="meta">→</span></a></li>
+    <li><a href="general_meeting/gm.html"><span class="n">B</span><span>총회</span><span class="meta">→</span></a></li>
+    <li><a href="org/org.html"><span class="n">C</span><span>조직도</span><span class="meta">→</span></a></li>
+    <li><a href="record_market/record_market.html"><span class="n">D</span><span>레코드마켓</span><span class="meta">→</span></a></li>
     <li><div class="row off"><span class="n">E</span><span>거라지</span><span class="meta">준비 중</span></div></li>
     <li><div class="row off"><span class="n">F</span><span>거기사</span><span class="meta">준비 중</span></div></li>
   </ul>
@@ -201,22 +41,22 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 
 <section id="articles">
   <header><span class="no">02</span><h2>정관</h2><p>8장과 부칙</p></header>
-  <div class="grid2">
-    <a href="https://ggdcoop.com/chapter/first.html"><span class="n">제1장</span><span class="t">총칙</span></a>
-    <a href="https://ggdcoop.com/chapter/second.html"><span class="n">제2장</span><span class="t">조합원</span></a>
-    <a href="https://ggdcoop.com/chapter/third.html"><span class="n">제3장</span><span class="t">출자와 경비부담 및 적립금</span></a>
-    <a href="https://ggdcoop.com/chapter/fourth.html"><span class="n">제4장</span><span class="t">총회와 이사회</span></a>
-    <a href="https://ggdcoop.com/chapter/fifth.html"><span class="n">제5장</span><span class="t">임원과 직원</span></a>
-    <a href="https://ggdcoop.com/chapter/sixth.html"><span class="n">제6장</span><span class="t">사업과 집행</span></a>
-    <a href="https://ggdcoop.com/chapter/seventh.html"><span class="n">제7장</span><span class="t">회계</span></a>
-    <a href="https://ggdcoop.com/chapter/eighth.html"><span class="n">제8장</span><span class="t">합병 분할 및 해산</span></a>
-    <a href="https://ggdcoop.com/chapter/ninth.html" style="grid-column:1/-1;border-right:0"><span class="n">부칙</span><span class="t">부칙</span></a>
+  <div class="grid2 body">
+    <a href="chapter/first.html"><span class="n">제1장</span><span class="t">총칙</span></a>
+    <a href="chapter/second.html"><span class="n">제2장</span><span class="t">조합원</span></a>
+    <a href="chapter/third.html"><span class="n">제3장</span><span class="t">출자와 경비부담 및 적립금</span></a>
+    <a href="chapter/fourth.html"><span class="n">제4장</span><span class="t">총회와 이사회</span></a>
+    <a href="chapter/fifth.html"><span class="n">제5장</span><span class="t">임원과 직원</span></a>
+    <a href="chapter/sixth.html"><span class="n">제6장</span><span class="t">사업과 집행</span></a>
+    <a href="chapter/seventh.html"><span class="n">제7장</span><span class="t">회계</span></a>
+    <a href="chapter/eighth.html"><span class="n">제8장</span><span class="t">합병 분할 및 해산</span></a>
+    <a href="chapter/ninth.html" class="wide"><span class="n">부칙</span><span class="t">부칙</span></a>
   </div>
 </section>
 
 <section id="rules">
   <header><span class="no">03</span><h2>규약</h2><p>PDF 문서</p></header>
-  <ol class="rows">
+  <ol class="rows body">
     <li><a href="https://ggdcoop.com/rules0326/ggd_rules_1.pdf"><span class="n">01</span><span>조합원 자격</span><span class="meta">PDF ↓</span></a></li>
     <li><a href="https://ggdcoop.com/rules0326/ggd_rules_2.pdf"><span class="n">02</span><span>조합원 제명</span><span class="meta">PDF ↓</span></a></li>
     <li><a href="https://ggdcoop.com/rules0326/ggd_rules_3.pdf"><span class="n">03</span><span>총회 운영</span><span class="meta">PDF ↓</span></a></li>
@@ -228,14 +68,14 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
   </ol>
 </section>
 
-<section id="listen" class="radio">
+<section id="listen" class="dark">
   <header><span class="no">04</span><h2>들어볼거거덩</h2><p>범골라디오</p></header>
-  <ol class="rows">
+  <ol class="rows body">
     <li><a href="https://drive.google.com/file/d/1M0GwWTRP3-Joka_NkJ7TpvRG_SWE4TOv/view?usp=drive_link"><span class="n">#1</span><span>범골라디오</span><span class="meta">2025.04.29 ▶</span></a></li>
     <li><a href="https://drive.google.com/file/d/1o93heAZjC60vn1Ss4eAdMjOlwMzNASe-/view?usp=drive_link"><span class="n">#2</span><span>범골라디오</span><span class="meta">2025.05.27 ▶</span></a></li>
     <li><a href="https://drive.google.com/file/d/1POAC7cz1Pi8IZCs85ToqYYyAzbvCZKot/view?usp=sharing"><span class="n">#3</span><span>범골라디오</span><span class="meta">2025.07.01 ▶</span></a></li>
     <li><a href="https://drive.google.com/file/d/1qkjoqDrN_iceVz94blNA_6sZV-IiDeHA/view?usp=sharing"><span class="n">#4</span><span>범골라디오</span><span class="meta">2025.07.29 ▶</span></a></li>
-    <li><a href="https://ggdcoop.com/listen_to_ggd/listen_to_ggd.html"><span class="n">+</span><span>전체 보기</span><span class="meta">→</span></a></li>
+    <li><a href="listen_to_ggd/listen_to_ggd.html"><span class="n">+</span><span>전체 보기</span><span class="meta">→</span></a></li>
   </ol>
 </section>
 
