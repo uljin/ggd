@@ -29,13 +29,13 @@
 
 {% assign s = site.data.site %}
 <footer id="contact">
-  <div>
+  <div class="f-main">
     <a class="big" href="mailto:{{ s.email }}">{{ s.email }}</a>
-    {{ s.address }}<br>
-    <a href="{{ s.instagram }}">Instagram @ggdcoop</a> · <a href="{{ s.youtube }}">YouTube @거거덩GGD</a>
+    <span class="f-addr">{{ s.address }}</span>
+    <span class="f-sns"><a href="{{ s.instagram }}">Instagram @ggdcoop</a> · <a href="{{ s.youtube }}">YouTube @거거덩GGD</a></span>
   </div>
-  <div>법인등록번호<br>{{ s.corp_no }}</div>
-  <div>사업자등록번호<br>{{ s.biz_no }}<a class="stamp" href="{{ '/' | relative_url }}"><img src="{{ '/images/ggd_stamp_paper.JPG' | relative_url }}" alt="거거덩 협동조합 도장" width="96"></a></div>
+  <div><span class="k">법인등록번호</span> {{ s.corp_no }}</div>
+  <div><span class="k">사업자등록번호</span> {{ s.biz_no }}<a class="stamp" href="{{ '/' | relative_url }}"><img src="{{ '/images/ggd_stamp_paper.JPG' | relative_url }}" alt="거거덩 협동조합 도장" width="96"></a></div>
 </footer>
 
 <dialog class="viewer" aria-label="사진 크게 보기">
