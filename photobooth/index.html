@@ -28,6 +28,11 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
       <button type="button" data-frame="paper" aria-pressed="true">종이</button>
       <button type="button" data-frame="green" aria-pressed="false">초록</button>
     </div>
+    <div class="booth-frames" role="radiogroup" aria-label="모양">
+      <span>모양</span>
+      <button type="button" data-layout="grid" aria-pressed="true">2×2</button>
+      <button type="button" data-layout="poster" aria-pressed="false">띠 + 포스터</button>
+    </div>
     <div class="booth-actions">
       <button type="button" class="b-save" hidden>저장 ↓</button>
       <button type="button" class="b-share" hidden>공유 ↗</button>
@@ -43,10 +48,9 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
   var count = root.querySelector(".booth-count"), flash = root.querySelector(".booth-flash"), msg = root.querySelector(".booth-msg");
   var thumbs = root.querySelector(".booth-thumbs");
   var btn = function (c) { return root.querySelector(".b-" + c); };
-  var shots = [], stream = null, frame = "paper";
+  var shots = [], stream = null, frame = "paper", layout = "grid";
   var logo = new Image(); logo.src = "{{ '/images/ggd_logo.JPG' | relative_url }}";
   var COLORS = { paper: "#f4f2ee", green: "#5cb96b" }, INK = "#111111";
-  var BACK = { paper: "#5cb96b", green: "#f4f2ee" };   // 판 색은 틀과 반대로: 어디에 올려도 틀이 보이게
   var W = 600, PAD = 30, GAP = 18, PW = W - PAD * 2, PH = Math.round(PW * 3 / 4), FOOT = 250;
   var H = PAD + PH * 4 + GAP * 3 + FOOT;
 
@@ -91,39 +95,67 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
     show("share", !!(navigator.canShare && navigator.canShare({ files: [new File([""], "a.png", { type: "image/png" })] })));
   });
 
-  function strip() {   // 세로 한 줄 네 컷 (가로 600 기준, 2배 해상도)
-    var c = document.createElement("canvas"); c.width = W * 2; c.height = H * 2;
-    var x = c.getContext("2d"); x.setTransform(2, 0, 0, 2, 0, 0);
-    x.fillStyle = COLORS[frame]; x.fillRect(0, 0, W, H);
-    shots.forEach(function (s, i) {
-      var y = PAD + i * (PH + GAP);
-      x.drawImage(s, PAD, y, PW, PH);
-      x.strokeStyle = INK; x.lineWidth = 2; x.strokeRect(PAD, y, PW, PH);
-    });
-    var fy = PAD + PH * 4 + GAP * 3;
-    x.fillStyle = INK; x.fillRect(PAD, fy + 18, PW, 4);
-    x.globalCompositeOperation = "multiply";
-    var lw = 380, lh = lw * logo.naturalHeight / logo.naturalWidth;
-    x.drawImage(logo, PAD, fy + 46, lw, lh);
-    x.globalCompositeOperation = "source-over";
-    x.fillStyle = INK; x.font = "400 18px 'IBM Plex Sans KR', sans-serif";
-    var d = new Date(), day = d.getFullYear() + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + String(d.getDate()).padStart(2, "0");
-    x.fillText("GGD Cooperative · " + day, PAD, H - PAD);
-    x.strokeStyle = INK; x.lineWidth = 4; x.strokeRect(1, 1, W - 2, H - 2);
-    return c;
+  function today() {
+    var d = new Date();
+    return d.getFullYear() + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + String(d.getDate()).padStart(2, "0");
   }
 
-  function compose() {   // 정사각형 판 위에 같은 띠 두 장 (사진관 인화지처럼)
+  function compose() {   // 결과는 언제나 정사각형 한 장
     if (!shots.length) return;
-    var S = 2160, M = 120, s = strip();
-    var sh = S - M * 2, sw = sh * s.width / s.height, gap = 72;
-    out.width = S; out.height = S;
-    var x = out.getContext("2d");
-    x.fillStyle = BACK[frame]; x.fillRect(0, 0, S, S);
-    var x0 = (S - (sw * 2 + gap)) / 2;
-    x.drawImage(s, x0, M, sw, sh);
-    x.drawImage(s, x0 + sw + gap, M, sw, sh);
+    var S = 1080, R = 2;
+    out.width = S * R; out.height = S * R;
+    var x = out.getContext("2d"); x.setTransform(R, 0, 0, R, 0, 0);
+    x.fillStyle = COLORS[frame]; x.fillRect(0, 0, S, S);
+    if (layout === "grid") grid(x, S); else poster(x, S);
+    x.strokeStyle = INK; x.lineWidth = 6; x.strokeRect(3, 3, S - 6, S - 6);   // 테두리: 어디에 올려도 틀이 보이게
   }
+
+  function grid(x, S) {   // 2×2 네 컷 + 아래 로고 띠
+    var m = 48, g = 20, cw = (S - m * 2 - g) / 2, ch = cw * 3 / 4;
+    shots.forEach(function (s, i) {
+      var cx = m + (i % 2) * (cw + g), cy = m + Math.floor(i / 2) * (ch + g);
+      x.drawImage(s, cx, cy, cw, ch);
+      x.strokeStyle = INK; x.lineWidth = 2; x.strokeRect(cx, cy, cw, ch);
+    });
+    var fy = m + ch * 2 + g + 24;
+    x.fillStyle = INK; x.fillRect(m, fy, S - m * 2, 5);
+    x.globalCompositeOperation = "multiply";
+    var lh = S - fy - 40 - m, lw = lh * logo.naturalWidth / logo.naturalHeight;
+    x.drawImage(logo, m, fy + 28, lw, lh);
+    x.globalCompositeOperation = "source-over";
+    x.fillStyle = INK; x.textAlign = "right";
+    x.font = "700 26px 'IBM Plex Sans KR', sans-serif"; x.fillText("GGD Cooperative", S - m, S - m - 34);
+    x.font = "400 22px 'IBM Plex Sans KR', sans-serif"; x.fillText(today(), S - m, S - m);
+    x.textAlign = "left";
+  }
+
+  function poster(x, S) {   // 왼쪽 세로 띠 + 오른쪽 포스터
+    var m = 56, g = 14, sh = S - m * 2, pw = (sh - g * 3) / 4 * 4 / 3, ph = pw * 3 / 4;
+    shots.forEach(function (s, i) {
+      var cy = m + i * (ph + g);
+      x.drawImage(s, m, cy, pw, ph);
+      x.strokeStyle = INK; x.lineWidth = 2; x.strokeRect(m, cy, pw, ph);
+    });
+    var rx = m + pw + 48, rw = S - rx - m;
+    x.fillStyle = INK; x.fillRect(rx - 24, m, 5, sh);
+    x.globalCompositeOperation = "multiply";
+    var lw = rw, lh = lw * logo.naturalHeight / logo.naturalWidth;
+    x.drawImage(logo, rx, m + 10, lw, lh);
+    x.globalCompositeOperation = "source-over";
+    x.fillStyle = INK;
+    x.font = "700 40px 'IBM Plex Sans KR', sans-serif";
+    ["맨땅에 생음악 심어", "아름다운 음악도시", "만들기"].forEach(function (t, i) { x.fillText(t, rx, S - m - 150 + i * 50); });
+    x.font = "400 22px 'IBM Plex Sans KR', sans-serif";
+    x.fillText("GGD Cooperative · " + today(), rx, S - m);
+  }
+
+  root.querySelectorAll("[data-layout]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      layout = b.dataset.layout;
+      root.querySelectorAll("[data-layout]").forEach(function (o) { o.setAttribute("aria-pressed", o === b); });
+      compose();
+    });
+  });
 
   root.querySelectorAll("[data-frame]").forEach(function (b) {
     b.addEventListener("click", function () {
