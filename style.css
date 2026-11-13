@@ -331,13 +331,15 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 /* 드래그 선택 색 */
 ::selection { background: var(--plane); color: var(--ink); }
 
-/* 상단 인스타그램 칸: 초록 면 */
-.top nav a.ig { background: var(--plane); }
-.top nav a.ig:hover { background: var(--ink); color: var(--paper); }
+/* 상단 바 왼쪽: 작은 로고 */
+.top a.home { display: flex; align-items: center; gap: 10px; }
+.top a.home img { height: 20px; width: auto; mix-blend-mode: multiply; }
+.top a.home:hover img { filter: invert(1); mix-blend-mode: screen; }
+@media (max-width: 720px) { .top a.home span { display: none; } }
 
 /* ── 첫 화면: 로고 표지 + 큰 메뉴 ── */
 .cover {
-  min-height: calc(100vh - 38px - 66px - 6 * 62px);
+  min-height: calc(100vh - 38px - 66px - 7 * 62px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

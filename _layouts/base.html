@@ -11,12 +11,10 @@
 <body id="top">
 
 <header class="top">
-  <a href="{{ '/' | relative_url }}">{{ site.data.site.name_en }}</a>
+  <a class="home" href="{{ '/' | relative_url }}"><img src="{{ '/images/ggd_logo.JPG' | relative_url }}" alt="거거덩 협동조합 처음으로" height="20"><span>GGD Cooperative</span></a>
   <nav>
-    <a href="{{ '/news/' | relative_url }}"{% if page.nav == "news" %} aria-current="page"{% endif %}>소식</a>
-    <a href="{{ '/articles/' | relative_url }}" class="hide-m"{% if page.nav == "articles" %} aria-current="page"{% endif %}>정관·규약</a>
-    <a href="{{ '/contact/' | relative_url }}"{% if page.nav == "contact" %} aria-current="page"{% endif %}>연락</a>
-    <a href="{{ site.data.site.instagram }}" class="ig" >Instagram ↗</a>
+    <a href="{{ site.data.site.youtube }}">YouTube ↗</a>
+    <a href="{{ site.data.site.instagram }}">Instagram ↗</a>
   </nav>
 </header>
 
