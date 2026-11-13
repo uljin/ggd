@@ -339,17 +339,32 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 
 /* ── 첫 화면: 로고 표지 + 큰 메뉴 ── */
 .cover {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
   min-height: calc(100vh - 38px - 66px - 7 * 62px);
+  border-bottom: var(--thick);
+}
+.cover h1 {
+  margin: 0;
+  padding: 28px 14px 14px;
+  border-right: var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+}
+.cover h1 img { width: 100%; max-width: 760px; mix-blend-mode: multiply; }
+.cover h1 span { font-size: 12px; font-weight: 400; letter-spacing: .02em; }
+.cover .plane {
+  background: var(--plane);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 24px;
-  padding: 28px 14px 14px;
-  border-bottom: var(--thick);
+  padding: 14px;
 }
-.cover h1 { margin: 0; }
-.cover h1 img { width: min(70%, 760px); mix-blend-mode: multiply; }
-.cover p { font-size: 13px; }
+.cover .plane p { font-size: 13px; }
+.cover .plane strong { font-size: clamp(20px, 3vw, 32px); line-height: 1.2; font-weight: 700; letter-spacing: -.02em; }
 .menu a {
   display: flex;
   justify-content: space-between;
@@ -366,8 +381,9 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 .menu a:hover { background: var(--plane); }
 .menu + footer { border-top: var(--line); }
 @media (max-width: 720px) {
-  .cover { min-height: 0; padding-bottom: 18px; }
-  .cover h1 img { width: 88%; }
+  .cover { grid-template-columns: 1fr; min-height: 0; }
+  .cover h1 { border-right: 0; border-bottom: var(--line); }
+  .cover .plane { min-height: 150px; }
 }
 
 /* 연락 페이지 큰 글씨 */

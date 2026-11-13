@@ -4,8 +4,11 @@ title: 거거덩 협동조합
 ---
 {% assign s = site.data.site %}
 <div class="cover">
-  <h1><img src="{{ '/images/ggd_logo.JPG' | relative_url }}" alt="거거덩"></h1>
-  <p>{{ s.name_en }} · {{ s.name }} · {{ s.tagline | newline_to_br | replace: "<br />", " " | strip_newlines }}</p>
+  <h1><img src="{{ '/images/ggd_logo.JPG' | relative_url }}" alt="거거덩"><span>{{ s.name_en }}</span></h1>
+  <div class="plane">
+    <p>{{ s.name }}<br>Seoul, KR</p>
+    <strong>{{ s.tagline | escape | newline_to_br }}</strong>
+  </div>
 </div>
 
 <div class="intro">
