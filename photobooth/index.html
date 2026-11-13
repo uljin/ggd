@@ -46,6 +46,7 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
   var shots = [], stream = null, frame = "paper";
   var logo = new Image(); logo.src = "{{ '/images/ggd_logo.JPG' | relative_url }}";
   var COLORS = { paper: "#f4f2ee", green: "#5cb96b" }, INK = "#111111";
+  var BACK = { paper: "#5cb96b", green: "#f4f2ee" };   // 판 색은 틀과 반대로: 어디에 올려도 틀이 보이게
   var W = 600, PAD = 30, GAP = 18, PW = W - PAD * 2, PH = Math.round(PW * 3 / 4), FOOT = 250;
   var H = PAD + PH * 4 + GAP * 3 + FOOT;
 
@@ -90,10 +91,9 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
     show("share", !!(navigator.canShare && navigator.canShare({ files: [new File([""], "a.png", { type: "image/png" })] })));
   });
 
-  function compose() {
-    if (!shots.length) return;
-    out.width = W * 2; out.height = H * 2;
-    var x = out.getContext("2d"); x.setTransform(2, 0, 0, 2, 0, 0);
+  function strip() {   // 세로 한 줄 네 컷 (가로 600 기준, 2배 해상도)
+    var c = document.createElement("canvas"); c.width = W * 2; c.height = H * 2;
+    var x = c.getContext("2d"); x.setTransform(2, 0, 0, 2, 0, 0);
     x.fillStyle = COLORS[frame]; x.fillRect(0, 0, W, H);
     shots.forEach(function (s, i) {
       var y = PAD + i * (PH + GAP);
@@ -109,6 +109,20 @@ description: 거거덩 로고가 박힌 네 컷 사진을 휴대폰이나 노트
     x.fillStyle = INK; x.font = "400 18px 'IBM Plex Sans KR', sans-serif";
     var d = new Date(), day = d.getFullYear() + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + String(d.getDate()).padStart(2, "0");
     x.fillText("GGD Cooperative · " + day, PAD, H - PAD);
+    x.strokeStyle = INK; x.lineWidth = 4; x.strokeRect(1, 1, W - 2, H - 2);
+    return c;
+  }
+
+  function compose() {   // 정사각형 판 위에 같은 띠 두 장 (사진관 인화지처럼)
+    if (!shots.length) return;
+    var S = 2160, M = 120, s = strip();
+    var sh = S - M * 2, sw = sh * s.width / s.height, gap = 72;
+    out.width = S; out.height = S;
+    var x = out.getContext("2d");
+    x.fillStyle = BACK[frame]; x.fillRect(0, 0, S, S);
+    var x0 = (S - (sw * 2 + gap)) / 2;
+    x.drawImage(s, x0, M, sw, sh);
+    x.drawImage(s, x0 + sw + gap, M, sw, sh);
   }
 
   root.querySelectorAll("[data-frame]").forEach(function (b) {
