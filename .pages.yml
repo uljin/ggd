@@ -53,6 +53,7 @@ content:
           - { name: email, label: 이메일, type: string }
           - { name: address, label: 주소, type: string }
           - { name: instagram, label: 인스타그램 주소, type: string }
+          - { name: youtube, label: 유튜브 주소, type: string }
           - { name: corp_no, label: 법인등록번호, type: string }
           - { name: biz_no, label: 사업자등록번호, type: string }
           - { name: join_text, label: 가입·탈퇴 안내, type: text }

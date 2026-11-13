@@ -14,5 +14,6 @@ data: listen
     {% for r in site.data.radio %}
     <li><a href="{{ r.link }}"><span class="n">#{{ forloop.index }}</span><span>{{ r.title }}</span><span class="meta">{{ r.date | date: "%Y.%m.%d" }} ▶</span></a></li>
     {% endfor %}
+    <li><a href="{{ site.data.site.youtube }}"><span class="n">▶</span><span>유튜브에서 더 보고 듣기 · @거거덩GGD</span><span class="meta">↗</span></a></li>
   </ol>
 </section>

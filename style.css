@@ -1,4 +1,16 @@
 /* GGD Cooperative — 선과 면 */
+@font-face {
+  font-family: "IBM Plex Sans KR";
+  src: url("fonts/IBMPlexSansKR-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans KR";
+  src: url("fonts/IBMPlexSansKR-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
 :root {
   --ink: #111;
   --paper: #f4f2ee;
@@ -11,7 +23,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { background: var(--paper); color: var(--ink); }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  font-family: "IBM Plex Sans KR", sans-serif;
   font-size: 15px;
   line-height: 1.5;
   word-break: keep-all;
