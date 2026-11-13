@@ -42,33 +42,5 @@
   <div>사업자등록번호<br>{{ s.biz_no }}<a class="stamp" href="{{ '/' | relative_url }}"><img src="{{ '/images/ggd_stamp_paper.JPG' | relative_url }}" alt="거거덩 협동조합 도장" width="96"></a></div>
 </footer>
 
-<div class="xh-x" aria-hidden="true"></div><div class="xh-y" aria-hidden="true"></div><div class="xh-pos" aria-hidden="true"></div>
-<script>
-// 십자선: 마우스가 있는 기기에서만
-(function () {
-  if (!matchMedia("(pointer: fine)").matches) return;
-  var root = document.documentElement;
-  var x = document.querySelector(".xh-x"), y = document.querySelector(".xh-y"), pos = document.querySelector(".xh-pos");
-  var mx = 0, my = 0, queued = false;
-  function draw() {
-    queued = false;
-    x.style.transform = "translateY(" + my + "px)";
-    y.style.transform = "translateX(" + mx + "px)";
-    var px = mx + 10, py = my + 8;
-    if (px > innerWidth - 90) px = mx - 84;
-    if (py > innerHeight - 20) py = my - 20;
-    pos.style.transform = "translate(" + px + "px," + py + "px)";
-    pos.textContent = "x " + mx + " · y " + (my + Math.round(scrollY));
-  }
-  addEventListener("mousemove", function (e) {
-    mx = e.clientX; my = e.clientY;
-    root.classList.add("xh-on");
-    root.classList.toggle("xh-link", !!e.target.closest("a, summary, button"));
-    if (!queued) { queued = true; requestAnimationFrame(draw); }
-  }, { passive: true });
-  addEventListener("scroll", function () { if (!queued) { queued = true; requestAnimationFrame(draw); } }, { passive: true });
-  document.addEventListener("mouseleave", function () { root.classList.remove("xh-on"); });
-})();
-</script>
 </body>
 </html>

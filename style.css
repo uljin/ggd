@@ -316,32 +316,8 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 .gallery.one { grid-template-columns: 1fr; }
 .gallery.one figure { border-right: 0; border-bottom: 0; }
 
-/* ── 십자선 커서 ── */
+/* 드래그 선택 색 */
 ::selection { background: var(--plane); color: var(--ink); }
-
-.xh-x, .xh-y, .xh-pos {
-  position: fixed;
-  top: 0; left: 0;
-  pointer-events: none;
-  z-index: 9999;
-  background: #fff;
-  mix-blend-mode: difference;   /* 종이 위에선 검정, 검은 면 위에선 흰색 */
-  opacity: 0;
-  transition: opacity .15s;
-}
-.xh-x { width: 100vw; height: 1px; }
-.xh-y { width: 1px; height: 100vh; }
-.xh-pos {
-  background: none;
-  color: #fff;
-  font-size: 11px;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: .02em;
-  white-space: nowrap;
-}
-.xh-on .xh-x, .xh-on .xh-y, .xh-on .xh-pos { opacity: 1; }
-.xh-link .xh-x { height: 3px; margin-top: -1px; }
-.xh-link .xh-y { width: 3px; margin-left: -1px; }
 
 /* 상단 인스타그램 칸: 초록 면 */
 .top nav a.ig { background: var(--plane); }
