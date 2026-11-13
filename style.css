@@ -315,3 +315,15 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 .post blockquote { border-left: var(--thick); padding-left: 14px; margin: 1em 0; }
 .gallery.one { grid-template-columns: 1fr; }
 .gallery.one figure { border-right: 0; border-bottom: 0; }
+
+/* ── 커서: 로고 '덩'의 ㅇ ── */
+@media (pointer: fine) {
+  html {
+    cursor: url("images/cursor-o.png") 16 16, auto;
+    cursor: image-set(url("images/cursor-o.png") 1x, url("images/cursor-o@2x.png") 2x) 16 16, auto;
+  }
+  a, summary, button, [role="button"] {
+    cursor: url("images/cursor-o-link.png") 16 16, pointer;
+    cursor: image-set(url("images/cursor-o-link.png") 1x, url("images/cursor-o-link@2x.png") 2x) 16 16, pointer;
+  }
+}
