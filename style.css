@@ -2,7 +2,8 @@
 :root {
   --ink: #111;
   --paper: #f4f2ee;
-  --plane: #ff4a1c;   /* 강조 면은 이 색 하나만 */
+  --plane: #5cb96b;   /* 거거덩 컬러(images/ggd_colour.jpg)의 초록 — 강조 면은 이 색 하나만 */
+  --stamp: #b8173d;   /* 도장 인주색. 아주 가끔만 */
   --mute: #555;
   --line: 1px solid var(--ink);
   --thick: 6px solid var(--ink);
@@ -45,13 +46,19 @@ img { display: block; max-width: 100%; }
   border-bottom: var(--thick);
 }
 .mast h1 {
-  font-size: clamp(88px, 24vw, 280px);
-  line-height: .82;
-  letter-spacing: -.06em;
-  font-weight: 700;
-  padding: 18px 14px 14px;
+  padding: 28px 14px 14px;
   border-right: var(--line);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
 }
+.mast h1 img {
+  width: 100%;
+  max-width: 760px;
+  mix-blend-mode: multiply;   /* 로고의 흰 바탕을 종이색에 녹임 */
+}
+.mast h1 span { font-size: 12px; font-weight: 400; letter-spacing: .02em; }
 .mast .plane {
   background: var(--plane);
   display: flex;
@@ -134,6 +141,7 @@ section > .body { min-width: 0; }
   align-items: baseline;
 }
 .rows a:hover { background: var(--ink); color: var(--paper); }
+.rows.toc a { grid-template-columns: 84px 1fr auto; }
 .rows .n, .rows .meta { font-size: 12px; font-variant-numeric: tabular-nums; }
 .rows .off { color: #999; }
 
@@ -183,8 +191,7 @@ section > .body { min-width: 0; }
 .articles .text { padding: 0 14px 14px 122px; max-width: calc(42em + 122px); }
 .articles .text p + p, .articles .text ol { margin-top: .5em; }
 .articles .text ol { list-style: decimal; padding-left: 1.4em; }
-.articles .todo { font-size: 12px; color: #999; }
-.articles .todo a { text-decoration: underline; text-underline-offset: 3px; }
+.articles .text .item { padding-left: 1.2em; text-indent: -1.2em; margin-top: .2em; }
 .articles :target h3, .articles article:target h3 { background: var(--plane); }
 
 /* 이전/다음 */
@@ -266,6 +273,8 @@ footer {
 footer > * { padding: 14px; }
 footer > * + * { border-left: var(--line); }
 footer a { text-decoration: underline; text-underline-offset: 3px; }
+footer .stamp { display: block; margin-top: 14px; width: 96px; }
+footer .stamp img { mix-blend-mode: multiply; transform: rotate(-4deg); }
 footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-decoration: none; display: block; margin-bottom: 8px; }
 
 /* ── 모바일 ── */
