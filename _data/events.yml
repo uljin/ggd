@@ -1,7 +1,4 @@
-# 일정: 관리자 화면 '일정'에서 추가. 날짜순 정렬은 자동.
-# - date: 2026-12-05
-#   time: "19:00"
-#   title: 리스닝 파티
-#   place: 거라지
-#   link: https://www.instagram.com/ggdcoop/
-[]
+- date: 2026-11-18
+  time: 20:30
+  title: test
+  place: yeogi
