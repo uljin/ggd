@@ -3,8 +3,42 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% if page.title and page.url != "/" %}{{ page.title }} — {% endif %}{{ site.data.site.name }}</title>
-<meta name="description" content="{{ page.description | default: site.description }}">
+{%- assign s = site.data.site -%}
+{%- if page.url == "/" -%}{%- assign t = s.name | append: " · " | append: s.name_en -%}
+{%- else -%}{%- assign t = page.title | append: " — " | append: s.name -%}{%- endif -%}
+{%- if page.collection == "chapters" or page.collection == "rules" -%}
+{%- assign kind = "정관 " | append: page.label -%}{%- if page.collection == "rules" -%}{%- assign kind = page.full_title -%}{%- endif -%}
+{%- assign arts = page.articles | map: "title" | join: ", " -%}
+{%- assign auto = "거거덩 협동조합 " | append: kind | append: " " | append: page.title | append: " — " | append: arts -%}
+{%- if page.collection == "rules" -%}{%- assign auto = "거거덩 협동조합 " | append: kind | append: " — " | append: arts -%}{%- endif -%}
+{%- endif -%}
+{%- assign d = page.description | default: auto | default: page.excerpt | default: site.description | strip_html | strip_newlines | truncate: 150 -%}
+{%- assign img = page.image | default: "/images/og.png" | absolute_url -%}
+<title>{{ t }}</title>
+<meta name="description" content="{{ d | escape }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+<!-- 카카오톡·인스타그램·페이스북 공유 미리보기 -->
+<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+<meta property="og:site_name" content="{{ s.name }}">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="{{ t | escape }}">
+<meta property="og:description" content="{{ d | escape }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ img }}">
+{%- unless page.image %}
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+{%- endunless %}
+<meta property="og:image:alt" content="거거덩 협동조합 — 맨땅에 생음악 심어 아름다운 음악도시 만들기">
+<meta name="twitter:card" content="summary_large_image">
+{% if page.url == "/" -%}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":{{ s.name | jsonify }},"alternateName":{{ s.name_en | jsonify }},
+ "url":{{ "/" | absolute_url | jsonify }},"logo":{{ "/images/ggd_logo.JPG" | absolute_url | jsonify }},"email":{{ s.email | jsonify }},
+ "address":{"@type":"PostalAddress","streetAddress":{{ s.address | jsonify }},"addressCountry":"KR"},
+ "sameAs":[{{ s.instagram | jsonify }},{{ s.youtube | jsonify }}]}
+</script>
+{%- endif %}
 <link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
 <link rel="icon" href="{{ '/images/ggd_stamp_paper.JPG' | relative_url }}">
 </head>

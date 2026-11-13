@@ -4,6 +4,7 @@ description: 맨땅에 생음악 심어 아름다운 음악도시 만들기 — 
 
 # uljin.github.io/ggd 에서 테스트하는 동안은 "/ggd".
 # ggdcoop.com 도메인으로 옮기면 "" 로 바꾸기.
+url: "https://uljin.github.io"   # 도메인 옮기면 "https://ggdcoop.com"
 baseurl: "/ggd"
 
 lang: ko
@@ -29,3 +30,6 @@ exclude:
   - README.md
   - LICENSE
   - .pages.yml
+
+plugins:
+  - jekyll-sitemap   # /sitemap.xml 자동 생성 (GitHub Pages 기본 지원)
