@@ -512,32 +512,6 @@ body > footer { margin-top: auto; border-top: var(--line); }
 .booth .b-shoot span { text-shadow: 0 1px 2px var(--ink); }
 
 /* ── 첫 페이지 (스케치 버전): 로고 → 메뉴 → 캘린더 → 슬로건 → 조합원/주사무소/문의 ── */
-.logo-band { padding: 28px 14px 22px; border-bottom: var(--line); }
-.logo-band h1 { margin: 0; }
-.logo-band img { width: min(100%, 760px); mix-blend-mode: multiply; }
-
-.mainnav { border-bottom: var(--thick); position: relative; z-index: 5; }
-.mainnav > ul { display: grid; grid-template-columns: repeat(4, 1fr); }
-.mainnav > ul > li { position: relative; }
-.mainnav > ul > li + li { border-left: var(--line); }
-.mainnav > ul > li > a, .mainnav > ul > li > button {
-  display: block; width: 100%; text-align: left;
-  padding: 12px 14px; font: inherit; font-size: clamp(18px, 2.2vw, 26px); font-weight: 700; letter-spacing: -.02em;
-  color: var(--ink); background: none; border: 0; cursor: pointer;
-}
-.mainnav .has-sub > button::after { content: " ▾"; font-size: .6em; vertical-align: .2em; }
-.mainnav > ul > li > a:hover, .mainnav .has-sub:hover > button, .mainnav .has-sub.open > button { background: var(--plane); }
-.mainnav .has-sub > ul {
-  display: none; position: absolute; left: -1px; right: -1px; top: 100%;
-  background: var(--paper) var(--grain); border: var(--line); border-top: 0;
-}
-@media (hover: hover) { .mainnav .has-sub:hover > ul { display: block; } }
-.mainnav .has-sub.open > ul, .mainnav .has-sub:focus-within > ul { display: block; }
-.mainnav .has-sub > ul li + li { border-top: var(--line); }
-.mainnav .has-sub > ul a, .mainnav .has-sub > ul .off { display: block; padding: 10px 14px; font-size: 15px; }
-.mainnav .has-sub > ul a:hover { background: var(--ink); color: var(--paper); }
-.mainnav .has-sub > ul .off { color: #999; }
-
 .cal { display: block; border-bottom: var(--line); }
 .cal-head { display: grid; grid-template-columns: 56px 1fr 56px; border-bottom: var(--line); align-items: stretch; }
 .cal-head h2 { padding: 10px 14px; font-size: clamp(28px, 4vw, 48px); font-weight: 700; letter-spacing: -.03em; text-align: center; font-variant-numeric: tabular-nums; }
@@ -554,19 +528,13 @@ body > footer { margin-top: auto; border-top: var(--line); }
 .cal-grid .day em { display: block; font-style: normal; font-weight: 700; font-size: 12px; line-height: 1.25; margin-top: 4px; }
 .cal-list { border-top: 0; }
 
-.slogan { background: var(--plane); border-bottom: var(--line); padding: 14px 14px 22px; display: flex; flex-direction: column; gap: 18px; }
-.slogan p { font-size: 13px; }
-.slogan strong { font-size: clamp(26px, 4vw, 44px); line-height: 1.15; font-weight: 700; letter-spacing: -.03em; }
 .intro .ask a { font-size: clamp(18px, 2.4vw, 26px); font-weight: 700; letter-spacing: -.02em; }
 .intro .ask a:hover { background: var(--plane); }
 
 @media (max-width: 720px) {
-  .mainnav > ul { grid-template-columns: 1fr 1fr; }
-  .mainnav > ul > li:nth-child(odd) { border-left: 0; }
-  .mainnav > ul > li:nth-child(n+3) { border-top: var(--line); }
   .cal-grid > div { min-height: 52px; padding: 4px; }
   .cal-grid .day em { font-size: 0; width: 6px; height: 6px; background: var(--ink); border-radius: 50%; }
   footer { flex-wrap: wrap; }
 }
-.mainnav .has-sub:hover, .mainnav .has-sub.open, .mainnav .has-sub:focus-within { z-index: 3; }
-.mainnav .has-sub > ul { z-index: 3; }
+
+.menu + .cal, .cal + .coop-menu { border-top: var(--thick); }

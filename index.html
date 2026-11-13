@@ -3,39 +3,27 @@ layout: base
 title: 거거덩 협동조합
 ---
 {% assign s = site.data.site %}
-<div class="logo-band">
-  <h1><img src="{{ '/images/ggd_logo.JPG' | relative_url }}" alt="거거덩"></h1>
+<div class="cover">
+  <h1><img src="{{ '/images/ggd_logo.JPG' | relative_url }}" alt="거거덩"><span>{{ s.name_en }}</span></h1>
+  <div class="plane">
+    <p>{{ s.name }}<br>Seoul, KR</p>
+    <strong>{{ s.tagline | escape | newline_to_br }}</strong>
+  </div>
 </div>
 
-<nav class="mainnav" aria-label="메뉴">
-  <ul>
-    <li><a href="{{ '/news/' | relative_url }}">소식</a></li>
-    <li class="has-sub">
-      <button type="button" aria-expanded="false">거라지</button>
-      <ul>
-        <li><a href="{{ '/garage/' | relative_url }}">거라지</a></li>
-        <li><a href="{{ '/garage/#space-1' | relative_url }}">바 아네모네</a></li>
-      </ul>
-    </li>
-    <li class="has-sub">
-      <button type="button" aria-expanded="false">들어볼거거덩</button>
-      <ul>
-        <li><a href="{{ '/listen_to_ggd/listen_to_ggd.html' | relative_url }}">범골라디오 · 사진</a></li>
-        <li><a href="{{ '/record_market/record_market.html' | relative_url }}">레코드마켓</a></li>
-        <li><a href="{{ '/photobooth/' | relative_url }}">거거덩네컷</a></li>
-      </ul>
-    </li>
-    <li class="has-sub">
-      <button type="button" aria-expanded="false">조합</button>
-      <ul>
-        <li><a href="{{ '/hall_of_fame/hall_of_fame.html' | relative_url }}">명예의 전당</a></li>
-        <li><a href="{{ '/general_meeting/gm.html' | relative_url }}">총회·조직</a></li>
-        <li><a href="{{ '/articles/' | relative_url }}">정관·규약</a></li>
-        <li><a href="{{ '/contact/' | relative_url }}">연락</a></li>
-        <li><span class="off">거기사 · {{ s.geogisa }}</span></li>
-      </ul>
-    </li>
-  </ul>
+<div class="intro">
+  <div><b>조합원</b>{{ s.welcome }}</div>
+  <div><b>주사무소</b>{{ s.address | remove: "서울시 " }}</div>
+  <div class="ask"><b>문의</b><a href="mailto:{{ s.email }}">{{ s.email }}</a></div>
+</div>
+
+{% assign latest = site.posts | first %}
+<nav class="menu" aria-label="메뉴">
+  <a href="{{ '/news/' | relative_url }}">소식<span>{% if latest %}{{ latest.title | truncate: 24 }} · {% endif %}01 →</span></a>
+  <a href="{{ '/garage/' | relative_url }}">거라지<span>바 아네모네 · 02 →</span></a>
+  <a href="{{ '/listen_to_ggd/listen_to_ggd.html' | relative_url }}">들어볼거거덩<span>범골라디오 · 03 →</span></a>
+  <a href="{{ '/record_market/record_market.html' | relative_url }}">레코드마켓<span>04 →</span></a>
+  <a href="{{ '/photobooth/' | relative_url }}">거거덩네컷<span>찍기 · 05 →</span></a>
 </nav>
 
 <section class="cal" aria-label="일정">
@@ -48,31 +36,18 @@ title: 거거덩 협동조합
   <ul class="rows cal-list"></ul>
 </section>
 
-<div class="slogan">
-  <p>{{ s.name }} · {{ s.name_en }}</p>
-  <strong>{{ s.tagline | escape | newline_to_br }}</strong>
-</div>
-
-<div class="intro">
-  <div><b>조합원</b>{{ s.welcome }}</div>
-  <div><b>주사무소</b>{{ s.address | remove: "서울시 " }}</div>
-  <div class="ask"><b>문의</b><a href="mailto:{{ s.email }}">{{ s.email }}</a></div>
-</div>
+<section class="coop-menu">
+  <header><span class="no">조합</span><h2>조합 안내</h2></header>
+  <ul class="rows body">
+    <li><a href="{{ '/hall_of_fame/hall_of_fame.html' | relative_url }}"><span class="n">A</span><span>명예의 전당</span><span class="meta">조합원 {{ site.data.members.size }}명 →</span></a></li>
+    <li><a href="{{ '/general_meeting/gm.html' | relative_url }}"><span class="n">B</span><span>총회·조직</span><span class="meta">→</span></a></li>
+    <li><a href="{{ '/articles/' | relative_url }}"><span class="n">C</span><span>정관·규약</span><span class="meta">→</span></a></li>
+    <li><a href="{{ '/contact/' | relative_url }}"><span class="n">D</span><span>연락</span><span class="meta">→</span></a></li>
+    <li><div class="row off"><span class="n">E</span><span>거기사</span><span class="meta">{{ s.geogisa }}</span></div></li>
+  </ul>
+</section>
 
 <script>
-// 메뉴: 누르면 펼치고, 바깥을 누르면 닫기 (마우스는 올리기만 해도 펼쳐짐)
-document.querySelectorAll(".mainnav .has-sub > button").forEach(function (b) {
-  b.addEventListener("click", function (e) {
-    e.stopPropagation();
-    var li = b.parentNode, open = !li.classList.contains("open");
-    document.querySelectorAll(".mainnav .has-sub").forEach(function (o) { o.classList.remove("open"); o.firstElementChild.setAttribute("aria-expanded", "false"); });
-    if (open) { li.classList.add("open"); b.setAttribute("aria-expanded", "true"); }
-  });
-});
-document.addEventListener("click", function () {
-  document.querySelectorAll(".mainnav .has-sub").forEach(function (o) { o.classList.remove("open"); o.firstElementChild.setAttribute("aria-expanded", "false"); });
-});
-
 // 캘린더
 (function () {
   var events = {{ site.data.events | jsonify }} || [];
