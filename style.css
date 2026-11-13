@@ -349,7 +349,7 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 .cover {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  min-height: calc(100vh - 38px - 66px - 9 * 62px);
+  min-height: calc(100vh - 38px - 66px - 10 * 62px);
   border-bottom: var(--thick);
 }
 .cover h1 {
@@ -457,3 +457,25 @@ body > footer { margin-top: auto; border-top: var(--line); }
 .sub-block .label { font-size: 12px; color: var(--mute); }
 .roles + .sub-block, .prose + .roles { border-top: var(--line); }
 .sub-rows { border-top: var(--line); }
+
+/* ── 거거덩네컷 ── */
+.booth-stage { position: relative; background: var(--ink); aspect-ratio: 4 / 3; max-height: 68vh; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.booth-stage video { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+.booth-result { max-height: 80vh; width: auto; max-width: 100%; height: auto; }
+.booth-stage:has(.booth-result:not([hidden])) { aspect-ratio: auto; padding: 14px; }
+.booth-msg { position: absolute; color: var(--paper); font-size: 13px; padding: 14px; text-align: center; }
+.booth-count { position: absolute; top: 14px; left: 14px; background: var(--plane); color: var(--ink); font-weight: 700; font-size: 22px; padding: 4px 10px; }
+.booth-count:empty { display: none; }
+.booth-flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; transition: opacity .15s; }
+.booth-flash.on { opacity: .9; transition: none; }
+.booth-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); border-top: var(--line); }
+.booth-thumbs:empty { display: none; }
+.booth-thumbs img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-right: var(--line); }
+.booth-thumbs img:last-child { border-right: 0; }
+.booth-frames, .booth-actions { display: flex; flex-wrap: wrap; border-top: var(--line); }
+.booth-frames span { padding: 12px 14px; font-size: 12px; color: var(--mute); }
+.booth button { font: inherit; color: var(--ink); background: none; border: 0; border-left: var(--line); padding: 12px 16px; cursor: pointer; }
+.booth-actions button:first-child { border-left: 0; }
+.booth-actions button { font-size: 18px; font-weight: 700; flex: 1; text-align: left; }
+.booth button:hover, .booth button[aria-pressed="true"] { background: var(--plane); }
+.booth button[hidden] { display: none; }
