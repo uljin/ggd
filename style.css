@@ -422,33 +422,6 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 .viewer-stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
 .viewer.single .viewer-nav { display: none; }
 
-/* ── 푸터: 기본은 칸마다 세로로 ── */
-footer .f-main > * { display: block; }
-footer .f-main .big { margin-bottom: 8px; }
-footer .k { display: block; }
-
-/* ── 넓은 화면: 푸터를 한 줄로 줄여서 화면 아래에 고정 ── */
-@media (min-width: 721px) {
-  footer {
-    position: sticky;        /* 상단 바와 같은 원리, 이번엔 아래쪽 */
-    bottom: 0;
-    z-index: 10;
-    background: var(--paper);
-    border-top: var(--line);
-    grid-template-columns: 1fr auto auto;
-    align-items: baseline;
-  }
-  footer > * { padding: 10px 14px; }
-  footer .f-main { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; }
-  footer .f-main > * { display: inline; }
-  footer .f-main .big { font-size: 15px; margin: 0; }
-  footer .k { display: inline; color: var(--mute); margin-right: 4px; }
-  footer .stamp {               /* 도장은 바 위로 삐져나오게 */
-    position: absolute;
-    right: 18px;
-    bottom: 100%;
-    margin: 0 0 -14px;
-    width: 64px;
-  }
-  .menu + footer { border-top: var(--line); }
-}
+/* ── 푸터는 항상 페이지 맨 끝: 내용이 짧으면 빈 공간 아래 화면 바닥에, 길면 내용 뒤에 ── */
+body { display: flex; flex-direction: column; }   /* body에는 이미 min-height: 100vh */
+body > footer { margin-top: auto; border-top: var(--line); }
