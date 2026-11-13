@@ -447,3 +447,10 @@ body > footer { margin-top: auto; border-top: var(--line); }
 .nothing .code { font-size: clamp(88px, 20vw, 220px); font-weight: 700; line-height: .85; letter-spacing: -.05em; }
 .nothing h1 { font-size: clamp(28px, 4vw, 48px); line-height: 1.15; letter-spacing: -.03em; }
 .nothing p:last-child { font-size: 13px; }
+
+/* 거라지 */
+.roles span.small { font-size: clamp(16px, 2vw, 20px); }
+.sub-block { border-top: var(--line); max-width: none; }
+.sub-block .label { font-size: 12px; color: var(--mute); }
+.roles + .sub-block, .prose + .roles { border-top: var(--line); }
+.sub-rows { border-top: var(--line); }

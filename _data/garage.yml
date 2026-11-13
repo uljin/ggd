@@ -1,0 +1,22 @@
+name: 거라지
+sub: 거거덩 라운지
+intro: |
+  거거덩 협동조합원들의 쉼터이자, 밴드 공연, 레코드 마켓, 리스닝 파티 같은 일이 벌어지는 복합 문화 예술 공간.
+spaces:
+  - name: 바 아네모네
+    name_en: Bar anemone
+    about: |
+      거라지 안에 있는 바. 칵테일과 위스키를 낸다.
+      금요일·토요일은 대관과 예약제로 운영하고, 평일은 공연 같은 일이 있는 날만 유동적으로 연다.
+    hours:
+      - label: 금 · 토
+        text: 대관 & 예약제
+      - label: 평일
+        text: 공연 등 일정이 있는 날만, 매주 인스타그램 게시글과 스토리로 공지
+    reserve: |
+      원하는 방문 시간대를 최소 하루 전에 인스타그램 DM으로 알려주세요.
+      한 팀이라도 예약하면 그날은 예약 안 한 분들도 편하게 들를 수 있어요.
+      파티 같은 전체 대관도 돼요.
+    address: 서울 서대문구 신촌역로 22-5, 3층
+    instagram: https://www.instagram.com/baranemone/
+    handle: "@baranemone"

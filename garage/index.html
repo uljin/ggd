@@ -1,0 +1,35 @@
+---
+layout: base
+title: 거라지
+heading: 거라지
+sub: 거거덩 라운지
+crumb: 조합
+plane: true
+description: 거거덩 라운지(거라지)와 그 안의 바 아네모네 — 공연, 레코드 마켓, 리스닝 파티, 칵테일과 위스키.
+---
+{% assign g = site.data.garage %}
+<section>
+  <header><span class="no">00</span><h2>여기는</h2></header>
+  <div class="body prose"><p>{{ g.intro | escape | newline_to_br }}</p></div>
+</section>
+
+{% for sp in g.spaces %}
+<section id="space-{{ forloop.index }}">
+  <header><span class="no">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span><h2>{{ sp.name }}</h2>{% if sp.name_en %}<p>{{ sp.name_en }}</p>{% endif %}</header>
+  <div class="body">
+    {% if sp.about %}<div class="prose"><p>{{ sp.about | escape | newline_to_br }}</p></div>{% endif %}
+    {% if sp.hours %}
+    <ul class="roles">
+      {% for h in sp.hours %}<li><span class="role">{{ h.label }}</span><span class="small">{{ h.text }}</span></li>{% endfor %}
+    </ul>
+    {% endif %}
+    {% if sp.reserve %}
+    <div class="prose sub-block"><p class="label">예약 · 대관</p><p>{{ sp.reserve | escape | newline_to_br }}</p></div>
+    {% endif %}
+    <ul class="rows sub-rows">
+      {% if sp.instagram %}<li><a href="{{ sp.instagram }}"><span class="n">IG</span><span>{{ sp.handle | default: "Instagram" }} · 이번 주 운영 시간과 예약 DM</span><span class="meta">↗</span></a></li>{% endif %}
+      {% if sp.address %}<li><div class="row"><span class="n">주소</span><span>{{ sp.address }}</span><span class="meta"></span></div></li>{% endif %}
+    </ul>
+  </div>
+</section>
+{% endfor %}

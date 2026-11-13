@@ -57,8 +57,35 @@ content:
           - { name: corp_no, label: 법인등록번호, type: string }
           - { name: biz_no, label: 사업자등록번호, type: string }
           - { name: join_text, label: 가입·탈퇴 안내, type: text }
-          - { name: garage, label: 거라지 상태 문구, type: string }
           - { name: geogisa, label: 거기사 상태 문구, type: string }
+
+      - name: garage
+        label: 거라지 (바 아네모네)
+        type: file
+        path: _data/garage.yml
+        fields:
+          - { name: name, label: 이름, type: string }
+          - { name: sub, label: 부제, type: string }
+          - { name: intro, label: 소개, type: text }
+          - name: spaces
+            label: 공간
+            type: object
+            list: true
+            fields:
+              - { name: name, label: 이름, type: string }
+              - { name: name_en, label: 영문 이름, type: string }
+              - { name: about, label: 소개, type: text }
+              - name: hours
+                label: 운영
+                type: object
+                list: true
+                fields:
+                  - { name: label, label: 요일, type: string }
+                  - { name: text, label: 내용, type: string }
+              - { name: reserve, label: 예약·대관 안내, type: text }
+              - { name: address, label: 주소, type: string }
+              - { name: instagram, label: 인스타그램 주소, type: string }
+              - { name: handle, label: 인스타그램 아이디, type: string }
 
       - name: members
         label: 명예의 전당 (조합원 명단)
