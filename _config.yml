@@ -13,10 +13,15 @@ collections:
   chapters:
     output: true
     permalink: /chapter/:name.html
+  rules:
+    output: true
+    permalink: /rules/:name.html
 
 defaults:
   - scope: { path: "", type: chapters }
     values: { layout: chapter, nav: articles }
+  - scope: { path: "", type: rules }
+    values: { layout: rule, nav: articles }
   - scope: { path: "", type: posts }
     values: { layout: post, nav: news, permalink: "/news/:year/:month/:day/:title/" }
 

@@ -1,0 +1,63 @@
+---
+layout: base
+---
+{% assign rules = site.rules | sort: "order" %}
+{% for r in rules %}{% if r.url == page.url %}{% assign i = forloop.index0 %}{% endif %}{% endfor %}
+{% assign prev_i = i | minus: 1 %}{% assign next_i = i | plus: 1 %}
+
+<div class="pagehead">
+  <div class="crumb"><a href="{{ '/' | relative_url }}">← 처음으로</a><a href="{{ '/articles/#rules' | relative_url }}">정관·규약</a></div>
+  <h1><small>거거덩 협동조합 규약 · {% if page.order < 10 %}0{% endif %}{{ page.order }}</small>{{ page.title }}</h1>
+</div>
+
+<section>
+  <header><span class="no">문서</span><h2>{{ page.full_title }}</h2>{% if page.approved %}<p>{{ page.approved | remove: "거거덩협동조합 " }}</p>{% endif %}</header>
+  <ul class="rows body">
+    {% if page.pdf %}<li><a href="{{ page.pdf | relative_url }}"><span class="n">PDF</span><span>원본 문서 내려받기</span><span class="meta">↓</span></a></li>{% endif %}
+    {% for a in page.articles %}{% assign aid = a.num | remove: "제" | replace: "조의", "-" | remove: "조" %}
+    <li><a href="#a{{ aid }}"><span class="n">{{ a.num }}</span><span>{{ a.title }}</span><span class="meta">↓</span></a></li>
+    {% endfor %}
+  </ul>
+</section>
+
+<section>
+  <header><span class="no">조문</span><h2>{{ page.title }}</h2>{% if page.lead %}<p>{{ page.lead }}</p>{% endif %}</header>
+  <div class="articles body">
+    {% for a in page.articles %}{% assign aid = a.num | remove: "제" | replace: "조의", "-" | remove: "조" %}
+    <article id="a{{ aid }}">
+      <h3><span class="n">{{ a.num }}</span><span>{{ a.title }}</span></h3>
+      <div class="text">{% include lines.html text=a.body %}</div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% if page.supplement %}
+<section>
+  <header><span class="no">부칙</span></header>
+  <div class="articles body">
+    {% for a in page.supplement %}
+    <article>
+      <h3><span class="n">{{ a.num }}</span><span>{{ a.title }}</span></h3>
+      <div class="text">{% include lines.html text=a.body %}</div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% for ap in page.appendix %}
+<section>
+  <header><span class="no">별첨</span><h2>{{ ap.title }}</h2>{% if ap.approved %}<p>{{ ap.approved | remove: "거거덩협동조합 " }}</p>{% endif %}</header>
+  <div class="articles body"><article><div class="text plain">{% include lines.html text=ap.body %}</div></article></div>
+</section>
+{% endfor %}
+
+<nav class="pager">
+  {% if i > 0 %}{% assign p = rules[prev_i] %}
+  <a href="{{ p.url | relative_url }}"><small>← 이전 규약</small><b>{{ p.title }}</b></a>
+  {% else %}<a href="{{ '/articles/' | relative_url }}"><small>← 정관·규약</small><b>목록</b></a>{% endif %}
+  {% if next_i < rules.size %}{% assign n = rules[next_i] %}
+  <a class="next" href="{{ n.url | relative_url }}"><small>다음 규약 →</small><b>{{ n.title }}</b></a>
+  {% else %}<a class="next" href="{{ '/articles/' | relative_url }}"><small>목록으로 →</small><b>정관·규약</b></a>{% endif %}
+</nav>

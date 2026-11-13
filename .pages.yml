@@ -131,13 +131,49 @@ content:
           - { name: note, label: 덧붙임, type: text }
 
       - name: rules
-        label: 규약 PDF
-        type: file
-        path: _data/rules.yml
-        list: true
+        label: 규약
+        type: collection
+        path: _rules
+        view:
+          fields: [title]
+          primary: title
+          default:
+            sort: order
+            order: asc
         fields:
-          - { name: title, label: 규약 이름, type: string, required: true }
-          - { name: file, label: PDF, type: file, required: true }
+          - { name: order, label: 순서, type: number }
+          - { name: title, label: 짧은 이름 (예 감사), type: string }
+          - { name: full_title, label: 정식 이름 (예 감사 규약), type: string }
+          - { name: approved, label: 승인 문구, type: string }
+          - { name: pdf, label: 원본 PDF, type: file }
+          - { name: lead, label: 머리말 (예 제1장 총칙), type: string }
+          - name: articles
+            label: 조문
+            type: object
+            list:
+              collapsible:
+                collapsed: true
+                summary: "{num} {title}"
+            fields:
+              - { name: num, label: 조 번호 (예 제3조), type: string }
+              - { name: title, label: 조 제목, type: string }
+              - { name: body, label: 본문 (한 줄에 한 항씩), type: text }
+          - name: supplement
+            label: 부칙
+            type: object
+            list: true
+            fields:
+              - { name: num, label: 조 번호, type: string }
+              - { name: title, label: 조 제목, type: string }
+              - { name: body, label: 본문, type: text }
+          - name: appendix
+            label: 별첨
+            type: object
+            list: true
+            fields:
+              - { name: title, label: 제목, type: string }
+              - { name: approved, label: 승인 문구, type: string }
+              - { name: body, label: 본문 (한 줄에 한 항씩), type: text }
 
   - name: listen
     label: 듣기·사진

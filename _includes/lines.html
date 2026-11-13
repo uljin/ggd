@@ -1,0 +1,10 @@
+{%- comment -%} 한 줄에 한 항. "1." 로 시작하면 들여쓰기, "가." 는 한 번 더, "•" 는 점 목록 {%- endcomment -%}
+{%- assign lines = include.text | strip | newline_to_br | split: "<br />" -%}
+{%- for l in lines -%}{%- assign t = l | strip -%}{%- if t != "" -%}
+{%- assign c = t | slice: 0 -%}{%- assign c2 = t | slice: 1 -%}
+{%- assign cls = "" -%}
+{%- if "0123456789" contains c -%}{%- assign cls = "item" -%}
+{%- elsif c2 == "." and "가나다라마바사아자차카타파하" contains c -%}{%- assign cls = "item2" -%}
+{%- elsif c == "•" -%}{%- assign cls = "item2" -%}{%- endif -%}
+<p{% if cls != "" %} class="{{ cls }}"{% endif %}>{{ t | escape }}</p>
+{% endif -%}{%- endfor -%}

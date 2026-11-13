@@ -425,3 +425,8 @@ footer .big { font-size: 22px; font-weight: 700; letter-spacing: -.02em; text-de
 /* ── 푸터는 항상 페이지 맨 끝: 내용이 짧으면 빈 공간 아래 화면 바닥에, 길면 내용 뒤에 ── */
 body { display: flex; flex-direction: column; }   /* body에는 이미 min-height: 100vh */
 body > footer { margin-top: auto; border-top: var(--line); }
+
+/* 조문 안의 더 깊은 항목 (가. 나. / •) */
+.articles .text .item2 { padding-left: 2.4em; text-indent: -1.2em; margin-top: .2em; }
+.articles .text.plain .item { padding-left: 0; text-indent: 0; font-weight: 700; margin-top: .8em; }
+.articles .text.plain { padding-left: 14px; padding-top: 14px; }

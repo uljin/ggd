@@ -17,10 +17,11 @@ nav: articles
 </section>
 
 <section id="rules">
-  <header><span class="no">02</span><h2>규약</h2><p>PDF 문서</p></header>
+  <header><span class="no">02</span><h2>규약</h2><p>2024년 3월 26일 총회 승인</p></header>
   <ol class="rows body">
-    {% for r in site.data.rules %}
-    <li><a href="{{ r.file | relative_url }}"><span class="n">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span><span>{{ r.title }}</span><span class="meta">PDF ↓</span></a></li>
+    {% assign rules = site.rules | sort: "order" %}
+    {% for r in rules %}
+    <li><a href="{{ r.url | relative_url }}"><span class="n">{% if r.order < 10 %}0{% endif %}{{ r.order }}</span><span>{{ r.title }}</span><span class="meta">{{ r.articles.size }}개 조 →</span></a></li>
     {% endfor %}
   </ol>
 </section>

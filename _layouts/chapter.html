@@ -28,10 +28,7 @@ layout: base
     <article id="a{{ aid }}">
       <h3><span class="n">{{ a.num }}</span><span>{{ a.title }}</span></h3>
       <div class="text">
-        {% assign lines = a.body | strip | newline_to_br | split: "<br />" %}
-        {% for l in lines %}{% assign t = l | strip %}{% if t != "" %}{% assign c = t | slice: 0 %}
-        <p{% if "0123456789" contains c %} class="item"{% endif %}>{{ t | escape }}</p>
-        {% endif %}{% endfor %}
+        {% include lines.html text=a.body %}
       </div>
     </article>
     {% endfor %}
